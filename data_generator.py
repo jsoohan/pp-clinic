@@ -200,11 +200,15 @@ def collect_kpi() -> dict:
     현재: .env의 MANUAL_KPI_XXX 값 또는 fallback 기본값 사용
     """
     print("\n[4/4] KPI 집계 중 (수동 입력 또는 CRM 연동)...")
+    def _get_int(key: str, default: int) -> int:
+        val = os.getenv(key, "").strip()
+        return int(val) if val.isdigit() else default
+
     kpi = {
-        "today_inquiries":    int(os.getenv("MANUAL_KPI_INQUIRIES", FALLBACK_KPI["today_inquiries"])),
-        "today_bookings":     int(os.getenv("MANUAL_KPI_BOOKINGS", FALLBACK_KPI["today_bookings"])),
-        "search_vol_main":    int(os.getenv("MANUAL_KPI_SEARCH_VOL", FALLBACK_KPI["search_vol_main"])),
-        "competitor_risks":   int(os.getenv("MANUAL_KPI_RISKS", FALLBACK_KPI["competitor_risks"])),
+        "today_inquiries":    _get_int("MANUAL_KPI_INQUIRIES", FALLBACK_KPI["today_inquiries"]),
+        "today_bookings":     _get_int("MANUAL_KPI_BOOKINGS", FALLBACK_KPI["today_bookings"]),
+        "search_vol_main":    _get_int("MANUAL_KPI_SEARCH_VOL", FALLBACK_KPI["search_vol_main"]),
+        "competitor_risks":   _get_int("MANUAL_KPI_RISKS", FALLBACK_KPI["competitor_risks"]),
         "target_inquiries":   60,
         "target_bookings":    36,
         "target_conversion":  60.0,
