@@ -1,0 +1,29 @@
+# ─── Python ───
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+
+# ─── 환경 설정 (절대 커밋 금지!) ───
+.env
+*.env
+
+# ─── 데이터 / 로그 ───
+data/*.json
+logs/
+*.log
+dashboard_data.json
+
+# ─── OS ───
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ─── IDE ───
+.vscode/
+.idea/
+*.swp
+
+# ─── 크롤러 캐시 ───
+found_competitors.json

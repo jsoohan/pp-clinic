@@ -1,0 +1,47 @@
+name: Daily Report (22:00 KST)
+
+on:
+  schedule:
+    - cron: '0 13 * * *'   # UTC 13:00 = KST 22:00, 매일
+  workflow_dispatch:         # 수동 실행 버튼
+
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Daily Report + Telegram
+        env:
+          NAVER_CLIENT_ID:      ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET:  ${{ secrets.NAVER_CLIENT_SECRET }}
+          GEMINI_API_KEY:       ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_API_KEY:       ${{ secrets.NOTION_API_KEY }}
+          NOTION_LOG_DB_ID:     ${{ secrets.NOTION_LOG_DB_ID }}
+          NOTION_MASTER_DB_ID:  ${{ secrets.NOTION_MASTER_DB_ID }}
+          MANUAL_KPI_INQUIRIES: ${{ vars.MANUAL_KPI_INQUIRIES }}
+          MANUAL_KPI_BOOKINGS:  ${{ vars.MANUAL_KPI_BOOKINGS }}
+          MANUAL_KPI_SEARCH_VOL: ${{ vars.MANUAL_KPI_SEARCH_VOL }}
+          MANUAL_KPI_RISKS:     ${{ vars.MANUAL_KPI_RISKS }}
+          PYTHONUTF8: "1"
+        run: python data_generator.py --mode daily
+
+      - name: Upload dashboard_data.json as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-data-daily
+          path: dashboard_data.json
+          retention-days: 7

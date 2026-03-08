@@ -1,0 +1,83 @@
+{
+  "name": "PP Clinic 10-Step Dashboard Automation",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "interval": 24
+            }
+          ]
+        }
+      },
+      "id": "trigger",
+      "name": "Daily Trigger",
+      "type": "n8n-nodes-base.cron",
+      "typeVersion": 1,
+      "position": [250, 300]
+    },
+    {
+      "parameters": {
+        "url": "https://api.naver.com/datalab/search",
+        "authentication": "headerAuth",
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "X-Naver-Client-Id",
+              "value": "={{$node[\"Config\"].json[\"NAVER_ID\"]}}"
+            }
+          ]
+        }
+      },
+      "id": "naver-trend",
+      "name": "Naver Trend Collector",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [450, 300]
+    },
+    {
+      "parameters": {
+        "model": "gpt-4o",
+        "prompt": "다음 리뷰 텍스트를 분석하여 '상담실장 불친절', '대기시간 길음', '시술 부작용' 키워드가 있는지 확인하고 1~10점 사이의 감성 점수를 매겨줘: {{$json[\"review_text\"]}}"
+      },
+      "id": "ai-analysis",
+      "name": "AI Sentiment Analysis",
+      "type": "n8n-nodes-base.openAi",
+      "typeVersion": 1,
+      "position": [650, 300]
+    },
+    {
+      "parameters": {
+        "resource": "databasePage",
+        "operation": "create",
+        "databaseId": "={{$node[\"Config\"].json[\"NOTION_DB_ID\"]}}",
+        "propertiesUi": {
+          "propertyValues": [
+            {
+              "property": "핵심 인사이트",
+              "value": "={{$json[\"message\"]}}"
+            }
+          ]
+        }
+      },
+      "id": "notion-sync",
+      "name": "Notion Sync",
+      "type": "n8n-nodes-base.notion",
+      "typeVersion": 1,
+      "position": [850, 300]
+    }
+  ],
+  "connections": {
+    "Daily Trigger": {
+      "main": [[{"node": "Naver Trend Collector", "type": "main", "index": 0}]]
+    },
+    "Naver Trend Collector": {
+      "main": [[{"node": "AI Sentiment Analysis", "type": "main", "index": 0}]]
+    },
+    "AI Sentiment Analysis": {
+      "main": [[{"node": "Notion Sync", "type": "main", "index": 0}]]
+    }
+  }
+}

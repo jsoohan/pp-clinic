@@ -1,0 +1,68 @@
+name: Monthly Report (Last Day 22:00 KST)
+
+on:
+  schedule:
+    # 28~31일 UTC 13:00 실행 → Python에서 마지막 날인지 확인 후 발송
+    - cron: '0 13 28-31 * *'
+  workflow_dispatch:
+
+jobs:
+  monthly-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Check if last day of month
+        id: check_last_day
+        run: |
+          TODAY=$(date +%d)
+          LAST=$(date -d "$(date +%Y-%m-01) +1 month -1 day" +%d)
+          echo "today=$TODAY last=$LAST"
+          if [ "$TODAY" = "$LAST" ]; then
+            echo "is_last_day=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_last_day=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Checkout
+        if: steps.check_last_day.outputs.is_last_day == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.check_last_day.outputs.is_last_day == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        if: steps.check_last_day.outputs.is_last_day == 'true'
+        run: pip install -r requirements.txt
+
+      - name: Run Monthly Report + Telegram
+        if: steps.check_last_day.outputs.is_last_day == 'true'
+        env:
+          NAVER_CLIENT_ID:      ${{ secrets.NAVER_CLIENT_ID }}
+          NAVER_CLIENT_SECRET:  ${{ secrets.NAVER_CLIENT_SECRET }}
+          GEMINI_API_KEY:       ${{ secrets.GEMINI_API_KEY }}
+          TELEGRAM_BOT_TOKEN:   ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID:     ${{ secrets.TELEGRAM_CHAT_ID }}
+          NOTION_API_KEY:       ${{ secrets.NOTION_API_KEY }}
+          NOTION_LOG_DB_ID:     ${{ secrets.NOTION_LOG_DB_ID }}
+          NOTION_MASTER_DB_ID:  ${{ secrets.NOTION_MASTER_DB_ID }}
+          MANUAL_KPI_INQUIRIES: ${{ vars.MANUAL_KPI_INQUIRIES }}
+          MANUAL_KPI_BOOKINGS:  ${{ vars.MANUAL_KPI_BOOKINGS }}
+          MANUAL_KPI_SEARCH_VOL: ${{ vars.MANUAL_KPI_SEARCH_VOL }}
+          MANUAL_KPI_RISKS:     ${{ vars.MANUAL_KPI_RISKS }}
+          MANUAL_KPI_EXPLORER_CONVERSION: ${{ vars.MANUAL_KPI_EXPLORER_CONVERSION }}
+          MANUAL_KPI_REVISIT_RATE:        ${{ vars.MANUAL_KPI_REVISIT_RATE }}
+          MANUAL_KPI_MOM_GROWTH:          ${{ vars.MANUAL_KPI_MOM_GROWTH }}
+          PYTHONUTF8: "1"
+        run: python data_generator.py --mode monthly
+
+      - name: Upload monthly data
+        if: steps.check_last_day.outputs.is_last_day == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: dashboard-data-monthly
+          path: dashboard_data.json
+          retention-days: 90

@@ -1,0 +1,1143 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>팽팽클리닉 | 실리프팅 퍼널 인텔리전스 대시보드</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0b14;
+      --surface: #12131f;
+      --surface2: #1a1c2e;
+      --border: rgba(255,255,255,0.07);
+      --accent: #a855f7;
+      --accent2: #6366f1;
+      --accent3: #06b6d4;
+      --green: #10b981;
+      --yellow: #f59e0b;
+      --red: #ef4444;
+      --orange: #f97316;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --card-radius: 16px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ─── HEADER ─── */
+    .header {
+      background: linear-gradient(135deg, #1a0a2e 0%, #0f1729 50%, #0a1a1a 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(20px);
+    }
+
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .logo-pill {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 900;
+      font-size: 15px;
+      padding: 8px 18px;
+      border-radius: 50px;
+      letter-spacing: 0.5px;
+    }
+    .header-title { font-size: 17px; font-weight: 700; }
+    .header-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    .status-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(16,185,129,0.12);
+      border: 1px solid rgba(16,185,129,0.3);
+      border-radius: 50px;
+      padding: 6px 14px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--green);
+    }
+    .dot-live {
+      width: 8px; height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16,185,129,0.4); }
+      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(16,185,129,0); }
+    }
+
+    /* ─── TABS ─── */
+    .tabs {
+      display: flex;
+      gap: 4px;
+      padding: 16px 32px 0;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .tab {
+      padding: 10px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      border-radius: 8px 8px 0 0;
+      cursor: pointer;
+      color: var(--muted);
+      transition: all 0.2s;
+      border: none;
+      background: none;
+      position: relative;
+    }
+    .tab.active { color: var(--accent); background: var(--bg); }
+    .tab.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0; right: 0;
+      height: 2px;
+      background: var(--accent);
+    }
+    .tab:hover:not(.active) { color: var(--text); background: rgba(255,255,255,0.04); }
+
+    /* ─── MAIN ─── */
+    .main { padding: 28px 32px; max-width: 1600px; margin: 0 auto; }
+
+    /* ─── TOP KPIs ─── */
+    .kpi-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+    .kpi-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 20px 22px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .kpi-card:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(0,0,0,0.3); }
+    .kpi-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+    .kpi-value { font-size: 32px; font-weight: 900; margin: 8px 0 4px; }
+    .kpi-meta { font-size: 12px; color: var(--muted); }
+    .kpi-up { color: var(--green); }
+    .kpi-down { color: var(--red); }
+    .kpi-neutral { color: var(--yellow); }
+
+    /* ─── FUNNEL SECTION ─── */
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .section-title .badge {
+      font-size: 11px;
+      background: rgba(168,85,247,0.15);
+      color: var(--accent);
+      border: 1px solid rgba(168,85,247,0.3);
+      border-radius: 50px;
+      padding: 2px 10px;
+      font-weight: 500;
+    }
+
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 22px;
+    }
+
+    /* ─── FUNNEL STAGES ─── */
+    .funnel-container { display: flex; flex-direction: column; gap: 8px; }
+    .funnel-stage {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .funnel-stage:hover { border-color: rgba(168,85,247,0.4); transform: translateX(4px); }
+    .funnel-stage.active-stage { border-color: var(--accent); background: rgba(168,85,247,0.08); }
+
+    .funnel-stage-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      background: linear-gradient(90deg, rgba(168,85,247,0.12), transparent);
+      border-radius: 10px;
+      transition: width 1s ease;
+    }
+
+    .stage-num {
+      font-size: 11px;
+      font-weight: 700;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+    }
+    .stage-info { flex: 1; position: relative; z-index: 1; }
+    .stage-name { font-size: 13px; font-weight: 600; }
+    .stage-desc { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+    .stage-bar-wrap { display: flex; align-items: center; gap: 8px; position: relative; z-index: 1; }
+    .stage-count { font-size: 13px; font-weight: 700; min-width: 40px; text-align: right; }
+    .stage-bar {
+      width: 80px;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .stage-bar-inner {
+      height: 100%;
+      border-radius: 3px;
+      transition: width 1s ease;
+    }
+
+    /* ─── QUARTERLY STRATEGY ─── */
+    .quarter-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .quarter-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 18px;
+      transition: all 0.2s;
+    }
+    .quarter-card:hover { transform: translateY(-2px); }
+    .quarter-card.q1 { border-top: 3px solid #a855f7; }
+    .quarter-card.q2 { border-top: 3px solid #06b6d4; }
+    .quarter-card.q3 { border-top: 3px solid #f59e0b; }
+    .quarter-card.q4 { border-top: 3px solid #10b981; }
+
+    .quarter-label { font-size: 11px; color: var(--muted); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
+    .quarter-season { font-size: 14px; font-weight: 700; margin: 6px 0; }
+    .quarter-target {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      display: inline-block;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+    .q1 .quarter-target { background: rgba(168,85,247,0.15); color: #c084fc; }
+    .q2 .quarter-target { background: rgba(6,182,212,0.15); color: #22d3ee; }
+    .q3 .quarter-target { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .q4 .quarter-target { background: rgba(16,185,129,0.15); color: #34d399; }
+
+    .quarter-items { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .quarter-items li { font-size: 11px; color: #94a3b8; display: flex; gap: 6px; }
+    .quarter-items li::before { content: "→"; color: var(--accent); flex-shrink: 0; }
+
+    /* ─── MONITORING TABLE ─── */
+    .monitor-tabs { display: flex; gap: 8px; margin-bottom: 16px; }
+    .monitor-tab {
+      padding: 6px 16px;
+      border-radius: 50px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      color: var(--muted);
+      background: none;
+      transition: all 0.2s;
+    }
+    .monitor-tab.active {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    table { width: 100%; border-collapse: collapse; }
+    th {
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    td {
+      padding: 10px 12px;
+      font-size: 13px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .stage-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 50px;
+      font-weight: 600;
+      background: rgba(168,85,247,0.15);
+      color: #c084fc;
+    }
+    .source-tag {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-weight: 600;
+      background: rgba(6,182,212,0.12);
+      color: #22d3ee;
+    }
+
+    /* ─── COMPETITOR SECTION ─── */
+    .competitor-grid { display: flex; flex-direction: column; gap: 8px; }
+    .competitor-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      background: var(--surface2);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+    .competitor-rank { font-size: 13px; font-weight: 700; width: 24px; color: var(--muted); }
+    .competitor-name { flex: 1; font-size: 13px; font-weight: 600; }
+    .competitor-stage { font-size: 11px; color: var(--muted); }
+    .sentiment-bar-wrap { display: flex; align-items: center; gap: 8px; }
+    .sentiment-score { font-size: 13px; font-weight: 700; min-width: 36px; }
+    .sentiment-bar {
+      width: 100px;
+      height: 6px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .sentiment-bar-inner { height: 100%; border-radius: 3px; }
+
+    .alert-pill {
+      font-size: 10px;
+      padding: 3px 10px;
+      border-radius: 50px;
+      font-weight: 600;
+    }
+    .alert-red { background: rgba(239,68,68,0.15); color: #f87171; }
+    .alert-yellow { background: rgba(245,158,11,0.15); color: #fbbf24; }
+    .alert-green { background: rgba(16,185,129,0.15); color: #34d399; }
+
+    /* ─── DETAIL PANEL (side) ─── */
+    .detail-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--card-radius);
+      padding: 22px;
+      height: 100%;
+    }
+    .detail-stage-num {
+      font-size: 11px; font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+    .detail-title { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+    .detail-quote { font-size: 12px; color: var(--muted); font-style: italic; margin-bottom: 16px; }
+
+    .detail-keywords { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 16px; }
+    .keyword-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: 50px;
+      background: rgba(99,102,241,0.12);
+      color: #818cf8;
+      border: 1px solid rgba(99,102,241,0.25);
+    }
+
+    .detail-actions { display: flex; flex-direction: column; gap: 8px; }
+    .action-item {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 10px;
+      background: var(--surface2);
+      border-radius: 8px;
+      font-size: 12px;
+    }
+    .action-channel {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+      background: rgba(168,85,247,0.15);
+      color: #c084fc;
+    }
+    .action-text { color: #94a3b8; line-height: 1.5; }
+
+    .panel-tabs { display: flex; gap: 6px; margin-bottom: 0; }
+
+    /* ─── SCROLLBAR ─── */  
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--surface2); border-radius: 3px; }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+    .monitor-content { display: none; }
+    .monitor-content.active { display: block; }
+
+    .empty-state {
+      text-align: center;
+      color: var(--muted);
+      padding: 40px;
+      font-size: 13px;
+    }
+
+    @media (max-width: 1100px) {
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .quarter-grid { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-left">
+    <div class="logo-pill">팽팽클리닉</div>
+    <div>
+      <div class="header-title">실리프팅 퍼널 인텔리전스 대시보드</div>
+      <div class="header-sub">고객 욕구 발생 → 구매 결정 10단계 통합 모니터링</div>
+    </div>
+  </div>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <div style="text-align:right;margin-right:4px;">
+      <div style="font-size:13px;font-weight:600;" id="current-date"></div>
+      <div style="font-size:11px;color:var(--muted);">Last refresh: 08:00 KST</div>
+    </div>
+    <div class="status-badge"><div class="dot-live"></div>AI 에이전트 가동 중</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab active" onclick="switchTab('overview', this)">📊 Overview</button>
+  <button class="tab" onclick="switchTab('funnel', this)">🎯 퍼널 상세</button>
+  <button class="tab" onclick="switchTab('monitoring', this)">📡 모니터링</button>
+  <button class="tab" onclick="switchTab('quarterly', this)">📅 분기 전략</button>
+  <button class="tab" onclick="switchTab('competitor', this)">🕵️ 경쟁사</button>
+</div>
+
+<div class="main">
+
+  <!-- ─── OVERVIEW ─── -->
+  <div id="tab-overview" class="tab-content active">
+    <div class="kpi-row">
+      <div class="kpi-card">
+        <div class="kpi-label">📞 오늘 문의 (09단계)</div>
+        <div class="kpi-value kpi-up">47</div>
+        <div class="kpi-meta kpi-up">↑ 12% vs 어제 · 목표: 60/일</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">📅 신규 예약 (10단계)</div>
+        <div class="kpi-value" style="color:var(--accent)">23</div>
+        <div class="kpi-meta kpi-up">↑ 전환율 49% · 목표: 60%</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">🔍 실리프팅 검색량 (05단계)</div>
+        <div class="kpi-value kpi-neutral">3,840</div>
+        <div class="kpi-meta kpi-neutral">→ 전주 대비 +2% · 상승 추세</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">⚡ 경쟁사 리스크 포착 (06단계)</div>
+        <div class="kpi-value kpi-up">3</div>
+        <div class="kpi-meta" style="color:var(--green)">부작용 리뷰 발생 → 대응 준비</div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <!-- Funnel Overview -->
+      <div class="card">
+        <div class="section-title">🎯 10단계 퍼널 현황 <span class="badge">실시간</span></div>
+        <div class="funnel-container" id="funnel-mini"></div>
+      </div>
+
+      <!-- Stage Detail Panel -->
+      <div class="detail-panel" id="detail-panel">
+        <div class="detail-stage-num">STAGE 선택</div>
+        <div class="detail-title">퍼널 단계를 클릭하세요</div>
+        <div class="detail-quote">각 단계를 클릭하면 상세 전략을 확인할 수 있습니다.</div>
+        <div class="empty-state">← 왼쪽 퍼널에서 단계 선택</div>
+      </div>
+    </div>
+
+    <!-- AI Alerts -->
+    <div class="card" style="margin-bottom:28px;">
+      <div class="section-title">🤖 AI 인사이트 & 액션 알림</div>
+      <div style="display:flex;flex-direction:column;gap:10px;" id="ai-alerts"></div>
+    </div>
+
+  </div>
+
+  <!-- ─── FUNNEL TAB ─── -->
+  <div id="tab-funnel" class="tab-content">
+    <div class="two-col">
+      <div class="card">
+        <div class="section-title">10단계 퍼널 전체 흐름</div>
+        <div class="funnel-container" id="funnel-full"></div>
+      </div>
+      <div class="detail-panel" id="detail-panel-2">
+        <div class="detail-stage-num">STAGE 선택</div>
+        <div class="detail-title">퍼널 단계를 클릭하세요</div>
+        <div class="empty-state">← 왼쪽 퍼널에서 단계 선택</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── MONITORING TAB ─── -->
+  <div id="tab-monitoring" class="tab-content">
+    <div class="monitor-tabs">
+      <button class="monitor-tab active" onclick="switchMonitor('daily', this)">📆 Daily</button>
+      <button class="monitor-tab" onclick="switchMonitor('weekly', this)">📅 Weekly</button>
+      <button class="monitor-tab" onclick="switchMonitor('monthly', this)">🗓️ Monthly</button>
+    </div>
+
+    <div class="card">
+      <div id="monitor-daily" class="monitor-content active">
+        <div class="section-title">매일 오전 8시 자동 수집 항목</div>
+        <table>
+          <thead><tr><th>퍼널 단계</th><th>모니터링 항목</th><th>데이터 소스</th><th>오늘 상태</th></tr></thead>
+          <tbody id="monitor-daily-body"></tbody>
+        </table>
+      </div>
+      <div id="monitor-weekly" class="monitor-content">
+        <div class="section-title">매주 월요일 자동 생성</div>
+        <table>
+          <thead><tr><th>퍼널 단계</th><th>모니터링 항목</th><th>분석 방향</th><th>이번 주 상태</th></tr></thead>
+          <tbody id="monitor-weekly-body"></tbody>
+        </table>
+      </div>
+      <div id="monitor-monthly" class="monitor-content">
+        <div class="section-title">매월 1일 자동 생성</div>
+        <table>
+          <thead><tr><th>퍼널 단계</th><th>모니터링 항목</th><th>분석 방향</th><th>이번 달 상태</th></tr></thead>
+          <tbody id="monitor-monthly-body"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── QUARTERLY TAB ─── -->
+  <div id="tab-quarterly" class="tab-content">
+    <div class="quarter-grid" id="quarter-grid"></div>
+    <div class="card">
+      <div class="section-title">📊 핵심 KPI 목표치</div>
+      <table>
+        <thead><tr><th>KPI</th><th>측정 방법</th><th>현재</th><th>목표</th><th>달성률</th></tr></thead>
+        <tbody id="kpi-table-body"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ─── COMPETITOR TAB ─── -->
+  <div id="tab-competitor" class="tab-content">
+    <div class="two-col">
+      <div class="card">
+        <div class="section-title">🏆 경쟁사 10곳 모니터링 <span class="badge">신사/강남</span></div>
+        <div class="competitor-grid" id="competitor-grid"></div>
+      </div>
+      <div class="card">
+        <div class="section-title">⚠️ 경쟁사 약점 포착 (Loss Capture)</div>
+        <div id="loss-capture"></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ─── DATA ───
+const FUNNEL_STAGES = [
+  { num: '01', name: '욕구 발생', desc: '노화 신호 자각', quote: '"나 요즘 왜 이렇게 늙어 보이지?"', count: 12400, maxCount: 12400, color: '#a855f7', role: '노출(Awareness)',
+    channels: [
+      { name: 'Naver DataLab', icon: '🔍', sentiment: 72, sentLabel: '중립',
+        keywords: [{kw:'얼굴 처짐', vol:'28,400/월', trend:'↑9%'},{kw:'나이 들어 보이는 이유', vol:'18,200/월', trend:'↑14%'},{kw:'피부 탄력 저하', vol:'12,700/월', trend:'↑6%'}],
+        testimonials: ['"거울 볼 때마다 언제 이렇게 됐나 싶어"','"사진 찍을 때 얼굴 윤곽이 확 죽어보임"'] },
+      { name: 'Instagram / Reels', icon: '📸', sentiment: 68, sentLabel: '공감형',
+        keywords: [{kw:'#안티에이징', vol:'노출 4.2M', trend:'꾸준'},{kw:'#피부탄력', vol:'노출 2.8M', trend:'↑11%'},{kw:'#얼굴처짐', vol:'노출 980K', trend:'↑22%'}],
+        testimonials: ['"이 릴스 보고 나 얘기인 줄 알았어 ㄷㄷ"','"좋아요 저장 다 함. 진짜 공감됨"'] },
+      { name: 'Threads / 온라인 커뮤니티', icon: '💬', sentiment: 65, sentLabel: '자조적',
+        keywords: [{kw:'처지는 피부', vol:'언급 340/주', trend:'↑18%'},{kw:'동안 끝난 것 같음', vol:'언급 210/주', trend:'신규'}],
+        testimonials: ['"서른 넘더니 진짜 갑자기 확 늙어버린 느낌"','"거울 주인공이 내가 아닌 것 같음"'] }
+    ]
+  },
+  { num: '02', name: '문제 인식', desc: '"내 얼굴이 처졌다" 자각', quote: '"볼 처짐·팔자주름 이 정도면 심각한 건가?"', count: 8900, maxCount: 12400, color: '#818cf8', role: '문제 정량화',
+    channels: [
+      { name: 'Naver 블로그/카페', icon: '📝', sentiment: 60, sentLabel: '불안형',
+        keywords: [{kw:'볼 처짐 심한가', vol:'9,400/월', trend:'↑12%'},{kw:'팔자주름 심해지는 나이', vol:'7,200/월', trend:'↑8%'},{kw:'턱선 없어지는 이유', vol:'5,100/월', trend:'↑17%'}],
+        testimonials: ['"30대 초반인데 팔자주름 생겼다고 하면 믿어?"','"볼 처짐이 심해서 마스크 벗기가 무서움"'] },
+      { name: 'YouTube 댓글', icon: '▶️', sentiment: 58, sentLabel: '걱정형',
+        keywords: [{kw:'자가진단 볼 처짐', vol:'조회 42K', trend:'↑5%'},{kw:'얼굴 처짐 심각도', vol:'조회 28K', trend:'신규'}],
+        testimonials: ['"내 얼굴이 딱 이 영상 3단계임... ㅠㅠ"','"언제부터 이렇게 된 건지 모르겠는 게 더 무서움"'] },
+      { name: '강남언니/바비톡 Q&A', icon: '💊', sentiment: 55, sentLabel: '심각 인식',
+        keywords: [{kw:'볼 처짐 몇 살부터', vol:'질문 180건/월', trend:'↑23%'},{kw:'이정도면 시술해야 하나', vol:'질문 240건/월', trend:'↑31%'}],
+        testimonials: ['"사진에서 팔자주름이 심하게 나와서 충격받았어"','"친구가 언니 요즘 핼쑥해보인다고 하는데... 처진 거 아닌가"'] }
+    ]
+  },
+  { num: '03', name: '자가 해결 시도', desc: '홈케어·생활습관 시도', quote: '"일단 홈케어 제품으로 해보자"', count: 6700, maxCount: 12400, color: '#60a5fa', role: '브랜드 심기',
+    channels: [
+      { name: 'Naver 쇼핑/블로그', icon: '🛍️', sentiment: 70, sentLabel: '기대형',
+        keywords: [{kw:'홈케어 리프팅 기기 추천', vol:'21,000/월', trend:'↑15%'},{kw:'가정용 HIFU', vol:'8,400/월', trend:'↑34%'},{kw:'콜라겐 크림 효과', vol:'14,200/월', trend:'↑7%'}],
+        testimonials: ['"일단 기기 사서 써보려고 함"','"리뷰 보니까 집에서도 어느 정도 된다던데"'] },
+      { name: 'YouTube / Reels (뷰티)', icon: '📸', sentiment: 72, sentLabel: '탐색형',
+        keywords: [{kw:'페이스 리프팅 홈케어', vol:'구독 급증 채널', trend:'↑28%'},{kw:'페이스 요가', vol:'조회 380K', trend:'꾸준'}],
+        testimonials: ['"이 유튜버 홈케어 루틴 따라했더니 신기하게 좀 나아진 것 같음"','"마사지랑 기기 병행하면 좋다고 해서 시작해봄"'] },
+      { name: 'Threads / 커뮤니티', icon: '💬', sentiment: 65, sentLabel: '공유형',
+        keywords: [{kw:'홈케어 기기 후기', vol:'언급 520/주', trend:'↑11%'},{kw:'피부탄력 음식', vol:'언급 290/주', trend:'꾸준'}],
+        testimonials: ['"갈바닉 기기 두 달 썼는데 솔직히 모르겠음"','"홈케어 뭐 쓰는 분들 있어요? 효과 있어요?"'] }
+    ]
+  },
+  { num: '04', name: '홈케어 한계 인식', desc: 'Pivot Point', quote: '"이걸로는 안 되겠는데..."', count: 4200, maxCount: 12400, color: '#facc15', role: '⚡ 핵심 전환점',
+    channels: [
+      { name: 'Naver 블로그/카페', icon: '📝', sentiment: 40, sentLabel: '실망형',
+        keywords: [{kw:'홈케어 리프팅 기기 효과 없음', vol:'6,800/월', trend:'↑41%'},{kw:'가정용 HIFU 효과 없다', vol:'3,200/월', trend:'↑55%'},{kw:'셀프 리프팅 한계', vol:'2,100/월', trend:'신규'}],
+        testimonials: ['"3개월 썼는데 솔직히 모르겠고 이제 제대로 알아봐야 할 것 같음"','"홈케어는 한계 있는 것 같아. 피부과 가야하나"'] },
+      { name: 'YouTube 댓글', icon: '▶️', sentiment: 38, sentLabel: '전환 신호',
+        keywords: [{kw:'어떤 시술 추천', vol:'댓글 780건/월', trend:'↑38%'},{kw:'피부과 가야할 것 같음', vol:'댓글 490건/월', trend:'↑27%'}],
+        testimonials: ['"댁들도 홈케어 포기하고 시술로 넘어온 분들 있어요?"','"이 영상 보고 마음 정했음. 기기 팔고 시술하러 가야겠다"'] },
+      { name: 'Meta 광고 반응 (리타겟)', icon: '🎯', sentiment: 55, sentLabel: '관심 전환',
+        keywords: [{kw:'홈케어 vs 시술 광고 클릭', vol:'CTR 3.8%', trend:'↑industry avg 1.2%'}],
+        testimonials: ['"이 광고 계속 떠서 봤는데 시술이랑 비교 내용이 나왔음"','"결국 피부과 알아보기 시작함"'] }
+    ]
+  },
+  { num: '05', name: '시술 광범위 탐색', desc: '리프팅 시술 종류 비교', quote: '"어떤 시술이 있지?"', count: 3840, maxCount: 12400, color: '#fbbf24', role: '전문가 포지셔닝',
+    channels: [
+      { name: 'Naver 검색 (DataLab)', icon: '🔍', sentiment: 62, sentLabel: '비교형',
+        keywords: [{kw:'실리프팅이란', vol:'18,400/월', trend:'↑22%'},{kw:'울쎄라 vs 실리프팅', vol:'12,800/월', trend:'↑19%'},{kw:'써마지 vs 실리프팅', vol:'9,200/월', trend:'↑14%'},{kw:'리프팅 시술 종류', vol:'24,600/월', trend:'↑31%'}],
+        testimonials: ['"울쎄라는 비싸고 실리프팅은 효과 지속이 궁금함"','"써마지는 열감이 심하다던데 실이 나아요?"'] },
+      { name: '강남언니/바비톡', icon: '💊', sentiment: 68, sentLabel: '정보 수집',
+        keywords: [{kw:'실리프팅 후기', vol:'조회 340K/월', trend:'↑27%'},{kw:'실리프팅 효과 기간', vol:'질문 820건/월', trend:'↑34%'}],
+        testimonials: ['"강남언니에서 실리프팅 후기 다 읽어봄. 대부분 만족하는듯"','"효과는 실이 좋은데 지속시간 차이가 있네"'] },
+      { name: 'YouTube / Shorts', icon: '▶️', sentiment: 70, sentLabel: '교육형',
+        keywords: [{kw:'실리프팅 원리', vol:'조회 180K', trend:'↑18%'},{kw:'리프팅 종류 설명', vol:'조회 240K', trend:'↑22%'}],
+        testimonials: ['"원장님이 직접 설명해주는 영상 진짜 도움됨"','"이 채널 보고 실리프팅으로 결정했어요"'] }
+    ]
+  },
+  { num: '06', name: '리스크 평가', desc: '부작용·통증·비용 우려', quote: '"혹시 부작용은? 얼마나 아파?"', count: 2900, maxCount: 12400, color: '#f87171', role: '⚠️ 두려움 해소',
+    channels: [
+      { name: 'Naver 블로그/카페', icon: '📝', sentiment: 35, sentLabel: '불안형',
+        keywords: [{kw:'실리프팅 부작용', vol:'14,200/월', trend:'↑38%'},{kw:'실리프팅 볼패임', vol:'6,400/월', trend:'↑52%'},{kw:'실리프팅 통증 심함', vol:'5,800/월', trend:'↑29%'},{kw:'실리프팅 얼마나 아파', vol:'8,100/월', trend:'↑22%'}],
+        testimonials: ['"부작용 후기 너무 무서워서 못 하겠음... 볼패임 진짜 있어요?"','"통증이 얼마나 심한지가 제일 걱정임"'] },
+      { name: '경쟁사 리뷰 (Crawler 포착)', icon: '🕵️', sentiment: 28, sentLabel: '🔴 공략기회',
+        keywords: [{kw:'강남스킨과 실리프팅 부작용', vol:'리뷰 3건/일 신규', trend:'↑급증'},{kw:'볼패임 병원 실수', vol:'언급 48건/주', trend:'↑71%'}],
+        testimonials: ['[경쟁사 A 리뷰] "시술 후 볼이 꺼진 것 같아요. 원장님한테 말했더니 그냥 두라고"','[경쟁사 B 리뷰] "통증이 심했는데 설명이 부족했어요. 다음엔 다른 병원 가볼듯"'] },
+      { name: '강남언니 Q&A', icon: '💊', sentiment: 45, sentLabel: '확인형',
+        keywords: [{kw:'실리프팅 가격 적정한가', vol:'질문 640건/월', trend:'↑18%'},{kw:'첫 시술 후기 믿을만해', vol:'질문 390건/월', trend:'꾸준'}],
+        testimonials: ['"솔직히 가격이 병원마다 달라서 어딜 믿어야 할지"','"부작용 없이 잘 된 분들 계세요? 불안해서..."'] }
+    ]
+  },
+  { num: '07', name: '병원 비교', desc: '강남 실리프팅 병원 비교', quote: '"어느 병원이 잘해?"', count: 1680, maxCount: 12400, color: '#fb923c', role: '경쟁에서 승리',
+    channels: [
+      { name: 'Naver 검색/스마트플레이스', icon: '📍', sentiment: 70, sentLabel: '선택형',
+        keywords: [{kw:'강남 실리프팅 잘하는 곳', vol:'8,200/월', trend:'↑16%'},{kw:'실리프팅 명의', vol:'4,400/월', trend:'↑24%'},{kw:'팽팽클리닉 실리프팅', vol:'1,240/월', trend:'↑61% 🔺'}],
+        testimonials: ['"팽팽클리닉 리뷰가 제일 솔직하게 쓰여 있는 것 같음"','"스마트플레이스 사진 before/after 보고 여기로 결정"'] },
+      { name: '강남언니/바비톡 랭킹', icon: '👑', sentiment: 74, sentLabel: '비교형',
+        keywords: [{kw:'강남언니 실리프팅 TOP10', vol:'조회 220K/월', trend:'↑19%'},{kw:'바비톡 실리프팅 병원 추천', vol:'조회 180K/월', trend:'↑13%'}],
+        testimonials: ['"강남언니 TOP5에 팽팽클리닉 있어서 먼저 봄"','"바비톡에서 이벤트 가격 비교했을 때 여기가 나았음"'] },
+      { name: 'Naver 블로그 (체험 후기)', icon: '📝', sentiment: 76, sentLabel: '신뢰형',
+        keywords: [{kw:'팽팽클리닉 후기', vol:'5,800/월', trend:'↑44%'},{kw:'팽팽클리닉 원장', vol:'2,100/월', trend:'↑38%'}],
+        testimonials: ['"블로그 후기가 진짜 솔직한 것 같아서 신뢰감 생김"','"다른 병원은 홍보성 느낌인데 여기는 실사용 느낌임"'] }
+    ]
+  },
+  { num: '08', name: '지역 필터링', desc: '신사·압구정 근처 검색', quote: '"신사·압구정 쪽 병원 찾아보자"', count: 980, maxCount: 12400, color: '#4ade80', role: '로컬 SEO 1순위',
+    channels: [
+      { name: 'Naver 지역 검색', icon: '🗺️', sentiment: 72, sentLabel: '위치 기반',
+        keywords: [{kw:'신사동 실리프팅', vol:'3,800/월', trend:'↑28%'},{kw:'압구정 피부과 실리프팅', vol:'2,900/월', trend:'↑22%'},{kw:'강남역 근처 리프팅 병원', vol:'2,100/월', trend:'↑15%'}],
+        testimonials: ['"신사역에서 가까운 데 찾다가 팽팽클리닉 나왔음"','"집 근처라서 상담 갔다가 바로 예약함"'] },
+      { name: '카카오맵 / T-Map', icon: '📍', sentiment: 68, sentLabel: '방문 의향',
+        keywords: [{kw:'팽팽클리닉 목적지 설정', vol:'월 780건', trend:'↑35%'},{kw:'신사 피부과 길찾기', vol:'월 1,240건', trend:'↑19%'}],
+        testimonials: ['"카카오맵으로 미리 가는 길 저장해둠"','"주차 정보 보고 차 가져가기로 결정"'] },
+      { name: 'Google Maps', icon: '🌐', sentiment: 75, sentLabel: '외국인/글로벌',
+        keywords: [{kw:'Sinsa thread lift clinic', vol:'월 340건', trend:'↑51%'},{kw:'Gangnam lifting clinic English', vol:'월 210건', trend:'신규'}],
+        testimonials: ['"Found this clinic through Google Maps reviews. Very impressed"','"5 star on Google, looks trustworthy"'] }
+    ]
+  },
+  { num: '09', name: '예약 의향', desc: '상담 문의·비용 확인', quote: '"한번 상담이나 받아볼까?"', count: 47, maxCount: 12400, color: '#2dd4bf', role: '🎯 마찰 제거',
+    channels: [
+      { name: '카카오톡 채널 문의', icon: '💬', sentiment: 78, sentLabel: '전환 준비',
+        keywords: [{kw:'실리프팅 가격 문의', vol:'오늘 18건', trend:'↑목표 대비 75%'},{kw:'첫 방문 상담 예약', vol:'오늘 14건', trend:'↑목표 대비 70%'}],
+        testimonials: ['"카톡으로 가격 물어보니 바로 답변 왔어요 빠르네"','"상담 예약하려고 카톡 보냈는데 쿠폰 줘서 기분 좋았음"'] },
+      { name: '강남언니/바비톡 상담 신청', icon: '💊', sentiment: 74, sentLabel: '이벤트 반응',
+        keywords: [{kw:'팽팽클리닉 이벤트 가격', vol:'클릭 340/일', trend:'↑22%'},{kw:'첫 방문 할인', vol:'클릭 180/일', trend:'↑31%'}],
+        testimonials: ['"이벤트 보고 강남언니로 상담 신청함"','"가격 비교하다가 여기 이벤트가 제일 나았음"'] },
+      { name: 'SMS/카톡 리타겟팅', icon: '📱', sentiment: 65, sentLabel: '리마인더',
+        keywords: [{kw:'미예약자 D+1 알림 CTR', vol:'12.4%', trend:'↑vs avg 4.2%'},{kw:'D+3 리마인드 전환율', vol:'8.8%', trend:'↑'}],
+        testimonials: ['"문자 왔는데 할인 쿠폰 있어서 다시 생각하게 됨"','"알림이 와서 까먹고 있었는데 다시 접속해서 예약했어요"'] }
+    ]
+  },
+  { num: '10', name: '구매 결정', desc: '실제 예약·시술 결제', quote: '"팽팽클리닉으로 정했다"', count: 23, maxCount: 12400, color: '#34d399', role: '구매 경험 극대화',
+    channels: [
+      { name: 'CRM / 예약 시스템', icon: '📋', sentiment: 90, sentLabel: '완료',
+        keywords: [{kw:'신규 시술 예약 완료', vol:'오늘 23건', trend:'전환율 49%'},{kw:'실리프팅 선택 비율', vol:'78%', trend:'↑vs 전주'}],
+        testimonials: ['"예약 확인 문자 왔고 상담 일정 잡힘. 기대됨"','"예약 과정이 깔끔해서 좋았어요"'] },
+      { name: '사후 SNS 후기', icon: '📸', sentiment: 88, sentLabel: '만족 표현',
+        keywords: [{kw:'팽팽클리닉 후기 게시', vol:'월 48건', trend:'↑38%'},{kw:'인스타 시술 후기 태그', vol:'월 32건', trend:'↑22%'}],
+        testimonials: ['"시술 후 결과 사진 인스타에 올렸더니 친구들이 다들 어디냐고 물어봄"','"원장님이 꼼꼼하게 해주셔서 후기 쓰고 싶었음"'] },
+      { name: 'CRM 재방문 / 추천', icon: '🔄', sentiment: 86, sentLabel: '재방문 신호',
+        keywords: [{kw:'재방문 예약 D+90', vol:'월 18건', trend:'재방문율 34%'},{kw:'지인 추천 신규 유입', vol:'월 7건', trend:'↑추천 프로그램 효과'}],
+        testimonials: ['"3개월 후 유지보수 하러 또 왔어요"','"친구한테 소개해줬더니 같이 오겠다고 함"'] }
+    ]
+  },
+];
+
+const QUARTERLY_DATA = [
+  { q: 'Q1', season: '새해 결심 · 봄맞이', months: '1~3월', targetStages: '01~03단계', color: 'q1', items: ['"새해에는 달라진 나" 욕구 자극 캠페인', '봄맞이 변신 비포/애프터 콘텐츠 집중', '설 연휴 전후 홈케어 팁 + 브랜드 노출', '졸업·입학 시즌 2030 타겟 광고'] },
+  { q: 'Q2', season: '결혼식 · 야외 시즌', months: '4~6월', targetStages: '04~06단계', color: 'q2', items: ['결혼식 D-day 타이밍 공략 광고', '봄 야외 활동 후 피부 고민 콘텐츠', '부작용 불안 해소 원장 라이브', '써마지/울쎄라 비교 → 실리프팅 유도'] },
+  { q: 'Q3', season: '가을 준비 · 추석', months: '7~9월', targetStages: '07~08단계', color: 'q3', items: ['경쟁사 대비 우위 before/after 강조', '추석 전 특가 이벤트 집중 기간', '지역 SEO 강화 (신사동 키워드)', '강남언니/바비톡 랭킹 상위 공략'] },
+  { q: 'Q4', season: '연말 파티 · 새해 D-day', months: '10~12월', targetStages: '09~10단계', color: 'q4', items: ['연말 특가 이벤트 집중 (11~12월)', '선물권(Gift Voucher) 도입', '재방문 CRM 자동 시퀀스 가동', '다음 해 신규 환자 조기 예약 유도'] },
+];
+
+const COMPETITORS = [
+  { rank: 1, name: '신사 뷰티의원', stage: '07단계 타겟', sentiment: 72, alert: '주의', alertClass: 'alert-yellow', pain: '대기시간 불만 급증' },
+  { rank: 2, name: '강남 스킨과', stage: '06단계 취약', sentiment: 55, alert: '공략기회', alertClass: 'alert-red', pain: '공장형 이미지·가격 불만' },
+  { rank: 3, name: '압구정 톡스', stage: '08단계 경쟁', sentiment: 80, alert: '양호', alertClass: 'alert-green', pain: '주차 문제 언급' },
+  { rank: 4, name: '청담 리프트', stage: '05단계 경쟁', sentiment: 68, alert: '주의', alertClass: 'alert-yellow', pain: '고가 정책 불만' },
+  { rank: 5, name: '강남역 피부과', stage: '08단계 경쟁', sentiment: 61, alert: '공략기회', alertClass: 'alert-red', pain: '시술 후 관리 부족' },
+  { rank: 6, name: '신사 에스테틱', stage: '03단계 경쟁', sentiment: 75, alert: '양호', alertClass: 'alert-green', pain: '예약 대기 불편' },
+  { rank: 7, name: '언니네 피부과', stage: '07단계 경쟁', sentiment: 58, alert: '공략기회', alertClass: 'alert-red', pain: '원장 변경 불만' },
+  { rank: 8, name: '강남 글로우', stage: '06단계 취약', sentiment: 70, alert: '주의', alertClass: 'alert-yellow', pain: '실리프팅 통증 언급' },
+  { rank: 9, name: '압구정 스킨랩', stage: '05단계 경쟁', sentiment: 82, alert: '양호', alertClass: 'alert-green', pain: '이벤트 광고 과다' },
+  { rank: 10, name: '삼성동 뷰티의원', stage: '08단계 경쟁', sentiment: 64, alert: '주의', alertClass: 'alert-yellow', pain: '가격 불투명' },
+];
+
+const DAILY_MONITORING = [
+  { stages: '01~03', item: '얼굴 처짐·홈케어 기기 검색량 변화', source: 'Naver DataLab', status: '🟢 정상 (↑8%)', statusClass: '' },
+  { stages: '05~06', item: '경쟁사 부작용 리뷰 신규 발생 여부', source: 'Review Crawler', status: '🔴 3건 포착!', statusClass: 'kpi-down' },
+  { stages: '07~08', item: '스마트플레이스 노출 순위 & 신규 리뷰', source: 'Naver API', status: '🟢 1위 유지', statusClass: '' },
+  { stages: '09~10', item: '카카오 신규 문의 수 · 온라인 예약 건수', source: 'CRM / Kakao', status: '🟡 47건 / 목표 60', statusClass: '' },
+  { stages: '전체', item: '경쟁사 10곳 신규 블로그/SNS 포스팅', source: 'Blog Crawler', status: '🟢 정상 수집', statusClass: '' },
+];
+
+const WEEKLY_MONITORING = [
+  { stages: '01~04', item: '욕구/탐색 키워드 트렌드 주간 변화', direction: '계절성 및 이슈 포착', status: '🟡 봄 시즌 상승 감지' },
+  { stages: '05~06', item: '실리프팅 관련 콘텐츠 SOV', direction: '우리 vs 경쟁사 노출 비율', status: '🟢 우리 15% 점유' },
+  { stages: '07~08', item: '경쟁사 이벤트·프로모션 변경 사항', direction: '즉각 대응 이벤트 기획', status: '🔴 경쟁사 B 특가 런칭' },
+  { stages: '09~10', item: '주간 상담→예약→시술 전환율', direction: '퍼널 병목 구간 파악', status: '🟡 전환율 49% (목표 60%)' },
+];
+
+const MONTHLY_MONITORING = [
+  { stages: '전체', item: '퍼널별 고객 분포 변화', direction: '전략 조정', status: '🟢 분석 완료' },
+  { stages: '03~04', item: '홈케어 → 시술 전환 비율', direction: '콘텐츠 효율 측정', status: '🟡 2.8% (목표 3%)' },
+  { stages: '07~08', item: 'SOV 순위·강남언니/바비톡 랭킹', direction: '경쟁 위치 파악', status: '🟢 강남언니 TOP 5' },
+  { stages: '09~10', item: '월간 매출·시술별 수익·재방문율', direction: 'P&L 분석', status: '🟢 MoM +12%' },
+  { stages: '전체', item: 'AI 엔진(ChatGPT·Gemini) 우리 병원 언급 빈도', direction: 'AEO(AI Engine Optimization)', status: '🟡 7.2% 언급률' },
+];
+
+const KPI_DATA = [
+  { kpi: '퍼널 진입율 (01단계)', method: '브랜드 콘텐츠 노출 횟수', current: '78,400', target: '100,000/월', rate: 78 },
+  { kpi: '탐색→관심 전환율 (04→05)', method: '리프팅 콘텐츠 클릭률', current: '2.4%', target: '3.0%', rate: 80 },
+  { kpi: '관심→상담 전환율 (08→09)', method: '스마트플레이스 클릭→문의', current: '7.2%', target: '10.0%', rate: 72 },
+  { kpi: '상담→예약 전환율 (09→10)', method: '상담 건수 대비 예약 건수', current: '49%', target: '60%', rate: 49 },
+  { kpi: '재방문율', method: '6개월 내 재방문 비율', current: '34%', target: '40%', rate: 85 },
+];
+
+const AI_ALERTS = [
+  { level: 'red', icon: '🚨', title: '경쟁사 B 부작용 리뷰 급증 포착', body: '강남 스킨과에서 실리프팅 볼패임 부작용 리뷰 3건 신규 등록. → 우리 "안전 프로토콜" 강조 콘텐츠 즉시 배포 권장.' },
+  { level: 'yellow', icon: '⚡', title: '04단계 → 05단계 전환 병목 발견', body: '"홈케어 한계 인식" 키워드 검색자 중 실리프팅 탐색으로 넘어오는 비율이 이번 주 1.2% 하락. Pivot 콘텐츠 강화 필요.' },
+  { level: 'green', icon: '✅', title: 'Q2 봄 시즌 욕구 지수 상승', body: '"결혼식 전 리프팅", "봄 피부 관리" 키워드가 전주 대비 +23% 상승. Q2 전략(04~06단계 집중) 사전 준비 권장.' },
+];
+
+// ─── RENDER ───
+function renderFunnel(containerId, detailId) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = '';
+  FUNNEL_STAGES.forEach((s, i) => {
+    const pct = Math.round((s.count / s.maxCount) * 100);
+    const el = document.createElement('div');
+    el.className = 'funnel-stage';
+    el.id = `stage-${containerId}-${i}`;
+    el.innerHTML = `
+      <div class="funnel-stage-fill" style="width:${pct}%"></div>
+      <div class="stage-num" style="background:${s.color}22;color:${s.color};border:1.5px solid ${s.color}44">${s.num}</div>
+      <div class="stage-info">
+        <div class="stage-name">${s.name}</div>
+        <div class="stage-desc">${s.desc}</div>
+      </div>
+      <div class="stage-bar-wrap">
+        <div class="stage-count" style="color:${s.color}">${s.count.toLocaleString()}</div>
+        <div class="stage-bar"><div class="stage-bar-inner" style="width:${pct}%;background:${s.color}"></div></div>
+      </div>
+    `;
+    el.addEventListener('click', () => showDetail(s, containerId, detailId, i));
+    container.appendChild(el);
+  });
+}
+
+function sentimentColor(v) { return v>=70?'var(--green)':v>=50?'var(--yellow)':'var(--red)'; }
+function sentimentBg(v) { return v>=70?'rgba(16,185,129,0.12)':v>=50?'rgba(245,158,11,0.12)':'rgba(239,68,68,0.12)'; }
+
+function showDetail(s, containerId, detailId, idx) {
+  document.querySelectorAll(`#${containerId} .funnel-stage`).forEach(el => el.classList.remove('active-stage'));
+  document.getElementById(`stage-${containerId}-${idx}`).classList.add('active-stage');
+  const panel = document.getElementById(detailId);
+  panel.style.overflowY = 'auto';
+  panel.style.maxHeight = '780px';
+
+  const channelsHtml = (s.channels||[]).map(ch => `
+    <div style="background:var(--surface2);border:1px solid var(--border);border-radius:12px;padding:14px;margin-bottom:12px;">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+        <div style="font-weight:700;font-size:13px;">${ch.icon} ${ch.name}</div>
+        <div style="font-size:11px;padding:3px 10px;border-radius:50px;background:${sentimentBg(ch.sentiment)};color:${sentimentColor(ch.sentiment)};font-weight:700;">감성 ${ch.sentiment} · ${ch.sentLabel}</div>
+      </div>
+      <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">📌 주요 키워드 & 볼륨</div>
+      <table style="width:100%;margin-bottom:10px;">
+        <thead><tr>
+          <th style="font-size:10px;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border);">키워드</th>
+          <th style="font-size:10px;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border);">볼륨/빈도</th>
+          <th style="font-size:10px;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border);">추세</th>
+          <th style="font-size:10px;color:var(--muted);padding:4px 6px;border-bottom:1px solid var(--border);">우선순위</th>
+        </tr></thead>
+        <tbody>
+          ${ch.keywords.map((k,i)=>`<tr>
+            <td style="padding:4px 6px;font-size:12px;font-weight:600;">${k.kw}</td>
+            <td style="padding:4px 6px;font-size:11px;color:var(--muted);">${k.vol}</td>
+            <td style="padding:4px 6px;font-size:11px;color:${k.trend.includes('↑')?'var(--green)':k.trend.includes('↓')?'var(--red)':'var(--muted)'};">${ k.trend}</td>
+            <td style="padding:4px 6px;"><span style="font-size:10px;padding:2px 6px;border-radius:4px;background:${i===0?'rgba(239,68,68,0.15)':i===1?'rgba(245,158,11,0.12)':'rgba(255,255,255,0.06)'};color:${i===0?'#f87171':i===1?'#fbbf24':'var(--muted)'};">${ i===0?'P0 긴급':i===1?'P1 높음':'P2'}</span></td>
+          </tr>`).join('')}
+        </tbody>
+      </table>
+      <div style="font-size:11px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">💬 실제 고객 발화 (Verbatim Voice)</div>
+      ${ch.testimonials.map(t=>`<div style="font-size:11px;color:#cbd5e1;padding:8px 10px;background:rgba(255,255,255,0.03);border-left:3px solid ${sentimentColor(ch.sentiment)};border-radius:0 6px 6px 0;margin-bottom:4px;line-height:1.6;">${t}</div>`).join('')}
+      <div style="margin-top:10px;padding:10px;background:rgba(99,102,241,0.08);border:1px solid rgba(99,102,241,0.2);border-radius:8px;">
+        <div style="font-size:10px;font-weight:700;color:#818cf8;margin-bottom:4px;">🤖 AI 자동 인사이트</div>
+        <div style="font-size:11px;color:#94a3b8;line-height:1.6;">
+          ${ch.sentiment>=70?'✅ <strong style="color:#e2e8f0">긍정 채널</strong> — 우호적 고객이 모여 있습니다. 브랜드 콘텐츠 배포 적기입니다.':ch.sentiment>=50?'⚡ <strong style="color:#e2e8f0">혼합 감성</strong> — 탐색·비교 중입니다. 정보성 콘텐츠로 신뢰를 먼저 쌓으세요.':'🔴 <strong style="color:#e2e8f0">부정/불안 채널</strong> — 두려움이 지배적. 솔직한 신뢰 콘텐츠 또는 경쟁사 약점 공략이 시급합니다.'}
+          ${(()=>{const hot=ch.keywords.filter(k=>k.trend.includes('↑')&&(k.trend.includes('%')||k.trend.includes('급증')||k.trend.includes('신규')));return hot.length?`<br/>📈 <strong style="color:#a5b4fc">"${hot[0].kw}"</strong> 키워드 급성장 → SEO·광고 소재 즉시 제작 권장`:'';})()} 
+        </div>
+        <div style="margin-top:8px;padding:5px 10px;background:rgba(168,85,247,0.1);border-radius:6px;font-size:11px;color:#c084fc;">
+          ▶ 즉시 액션: ${ch.sentiment>=70?'Before/After + 브랜드 감성 콘텐츠 집중 배포':ch.sentiment>=50?'원장 직접 출연 정보성 콘텐츠로 전문성 신뢰 구축':ch.sentLabel.includes('공략')?'경쟁사 부작용 리뷰 포착 → 우리 안전 프로토콜 강조 콘텐츠 즉시 배포':'불안 해소 Q&A + 실제 환자 후기 강화'}
+        </div>
+      </div>
+    </div>
+  `).join('');
+
+  panel.innerHTML = `
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px;">
+      <div style="width:40px;height:40px;border-radius:50%;background:${s.color}22;border:2px solid ${s.color}66;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:${s.color};flex-shrink:0;">${s.num}</div>
+      <div>
+        <div style="font-size:17px;font-weight:800;">${s.name}</div>
+        <div style="font-size:11px;color:var(--muted);font-style:italic;">${s.quote}</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;">
+      <div style="font-size:11px;padding:3px 10px;border-radius:50px;background:rgba(168,85,247,0.12);color:#c084fc;font-weight:600;">${s.role}</div>
+      <div style="font-size:11px;padding:3px 10px;border-radius:50px;background:rgba(255,255,255,0.06);color:var(--muted);font-weight:600;">추산 ${s.count.toLocaleString()}명</div>
+      <div style="font-size:11px;padding:3px 10px;border-radius:50px;background:rgba(255,255,255,0.06);color:var(--muted);font-weight:600;">전체 인지층의 ${Math.round(s.count/s.maxCount*100)}%</div>
+    </div>
+    <div style="font-size:12px;color:var(--muted);font-weight:700;margin-bottom:10px;">📡 채널별 상세 인텔리전스 <span style="font-size:10px;font-weight:400;">· 해석방법은 최하단 참조</span></div>
+    ${channelsHtml}
+    <div style="background:linear-gradient(135deg,rgba(168,85,247,0.06),rgba(99,102,241,0.06));border:1px solid rgba(168,85,247,0.25);border-radius:14px;padding:18px;margin-top:4px;">
+      <div style="font-size:13px;font-weight:800;margin-bottom:14px;">📖 이 화면 해석 방법</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:11px;">
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">📡 채널</div>
+          <div style="color:#94a3b8;line-height:1.6;">잠재 고객이 <strong style="color:#e2e8f0">이 단계에서 실제로 활동하는 온라인 공간</strong>입니다. 채널마다 행동 패턴이 다릅니다.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">🎯 감성 점수 0~100</div>
+          <div style="color:#94a3b8;line-height:1.6;"><span style="color:var(--green);font-weight:700;">70+</span> 긍정→콘텐츠 배포 적기<br/><span style="color:var(--yellow);font-weight:700;">50~69</span> 혼합→정보 콘텐츠<br/><span style="color:var(--red);font-weight:700;">~49</span> 부정→신뢰/공략 콘텐츠</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">📊 키워드 볼륨</div>
+          <div style="color:#94a3b8;line-height:1.6;"><strong style="color:#e2e8f0">실제 검색량·언급 빈도</strong>입니다. 볼륨이 높을수록 그 고민이 강합니다. <strong style="color:#e2e8f0">광고·콘텐츠 키워드로 그대로 활용</strong>하세요.</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">📈 트렌드 ↑↓</div>
+          <div style="color:#94a3b8;line-height:1.6;"><span style="color:var(--green);font-weight:700;">↑%</span> = 지금 증가 중 → <strong style="color:#e2e8f0">즉시 대응</strong><br/><span style="color:var(--muted);">꾸준</span> = 안정적 → 지속 대응<br/><span style="color:var(--green);">신규</span> = 이번 달 등장 → <strong style="color:#e2e8f0">선점 기회</strong></div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">🏷️ 우선순위 P0/P1/P2</div>
+          <div style="color:#94a3b8;line-height:1.6;"><span style="color:#f87171;font-weight:700;">P0</span> = 이번 주 내 반드시 대응<br/><span style="color:#fbbf24;font-weight:700;">P1</span> = 이번 달 내 제작<br/><span style="color:var(--muted);">P2</span> = 다음 분기 기획 반영</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.03);border-radius:8px;padding:10px;">
+          <div style="color:#a78bfa;font-weight:700;margin-bottom:4px;">💬 Verbatim 발화체</div>
+          <div style="color:#94a3b8;line-height:1.6;">실제 고객이 쓴 말 그대로입니다. 이 <strong style="color:#e2e8f0">말투를 광고 카피·상담 멘트에 녹이면</strong> 공감률 3~5배 상승합니다.</div>
+        </div>
+      </div>
+      <div style="margin-top:10px;padding:10px;background:rgba(255,255,255,0.03);border-radius:8px;font-size:11px;color:#64748b;line-height:1.8;">
+        💡 <strong style="color:#94a3b8">핵심 활용법:</strong> 빨간(감성 ~49) 채널 먼저 → 경쟁사 약점 공략 또는 신뢰 콘텐츠. ↑급등 P0 키워드 + Testimonial 발화체 조합 → 당일 SNS 소재. 보라색 ▶ 즉시 액션을 마케팅팀·AI 에이전트에게 전달.
+      </div>
+    </div>
+  `;
+}
+
+function renderQuarters() {
+  const grid = document.getElementById('quarter-grid');
+  if (!grid) return;
+  grid.innerHTML = QUARTERLY_DATA.map(q => `
+    <div class="quarter-card ${q.color}">
+      <div class="quarter-label">${q.q} · ${q.months}</div>
+      <div class="quarter-season">${q.season}</div>
+      <div class="quarter-target">집중 단계: ${q.targetStages}</div>
+      <ul class="quarter-items">${q.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+    </div>
+  `).join('');
+}
+
+function renderKPITable() {
+  const tbody = document.getElementById('kpi-table-body');
+  if (!tbody) return;
+  tbody.innerHTML = KPI_DATA.map(k => {
+    const color = k.rate >= 80 ? 'var(--green)' : k.rate >= 60 ? 'var(--yellow)' : 'var(--red)';
+    return `<tr>
+      <td style="font-weight:600">${k.kpi}</td>
+      <td style="color:var(--muted)">${k.method}</td>
+      <td style="font-weight:700;color:${color}">${k.current}</td>
+      <td style="color:var(--muted)">${k.target}</td>
+      <td><div style="display:flex;align-items:center;gap:8px">
+        <div style="width:80px;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden">
+          <div style="width:${k.rate}%;height:100%;background:${color};border-radius:3px"></div>
+        </div>
+        <span style="font-weight:700;color:${color}">${k.rate}%</span>
+      </div></td>
+    </tr>`;
+  }).join('');
+}
+
+function renderCompetitors() {
+  const grid = document.getElementById('competitor-grid');
+  if (!grid) return;
+  grid.innerHTML = COMPETITORS.map(c => {
+    const sColor = c.sentiment >= 75 ? 'var(--green)' : c.sentiment >= 60 ? 'var(--yellow)' : 'var(--red)';
+    return `<div class="competitor-row">
+      <div class="competitor-rank">${c.rank}</div>
+      <div style="flex:1">
+        <div class="competitor-name">${c.name}</div>
+        <div class="competitor-stage">${c.stage} · ${c.pain}</div>
+      </div>
+      <div class="sentiment-bar-wrap">
+        <div class="sentiment-score" style="color:${sColor}">${c.sentiment}</div>
+        <div class="sentiment-bar"><div class="sentiment-bar-inner" style="width:${c.sentiment}%;background:${sColor}"></div></div>
+      </div>
+      <div class="alert-pill ${c.alertClass}">${c.alert}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderLossCapture() {
+  const el = document.getElementById('loss-capture');
+  if (!el) return;
+  const opps = COMPETITORS.filter(c => c.alertClass === 'alert-red');
+  el.innerHTML = opps.map(c => `
+    <div style="padding:14px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.2);border-radius:10px;margin-bottom:10px;">
+      <div style="font-weight:700;font-size:13px;margin-bottom:4px;">🔴 ${c.name}</div>
+      <div style="font-size:12px;color:#f87171;margin-bottom:8px;">약점: ${c.pain}</div>
+      <div style="font-size:12px;color:var(--muted);">→ 즉시 대응: 우리의 <strong style="color:var(--text)">"${c.pain.includes('공장형') ? '1:1 프라이빗 케어'  : c.pain.includes('관리') ? '사후관리 시스템' : '원장 전문성'}"</strong> 강조 콘텐츠 배포 권장</div>
+    </div>
+  `).join('');
+}
+
+function renderMonitoring() {
+  const renderTable = (bodyId, rows) => {
+    const tbody = document.getElementById(bodyId);
+    if (!tbody) return;
+    tbody.innerHTML = rows.map(r => `<tr>
+      <td><span class="stage-tag">${r.stages}단계</span></td>
+      <td>${r.item}</td>
+      <td><span class="source-tag">${r.source || r.direction}</span></td>
+      <td class="${r.statusClass || ''}" style="font-weight:600">${r.status}</td>
+    </tr>`).join('');
+  };
+  renderTable('monitor-daily-body', DAILY_MONITORING);
+  renderTable('monitor-weekly-body', WEEKLY_MONITORING);
+  renderTable('monitor-monthly-body', MONTHLY_MONITORING);
+}
+
+function renderAlerts() {
+  const el = document.getElementById('ai-alerts');
+  if (!el) return;
+  const colors = { red: 'rgba(239,68,68,0.08)', yellow: 'rgba(245,158,11,0.08)', green: 'rgba(16,185,129,0.08)' };
+  const borderColors = { red: 'rgba(239,68,68,0.25)', yellow: 'rgba(245,158,11,0.25)', green: 'rgba(16,185,129,0.25)' };
+  el.innerHTML = AI_ALERTS.map(a => `
+    <div style="padding:14px 18px;background:${colors[a.level]};border:1px solid ${borderColors[a.level]};border-radius:10px;display:flex;gap:14px;align-items:flex-start">
+      <div style="font-size:20px">${a.icon}</div>
+      <div>
+        <div style="font-weight:700;font-size:13px;margin-bottom:4px">${a.title}</div>
+        <div style="font-size:12px;color:var(--muted);line-height:1.6">${a.body}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+// ─── TAB SWITCHING ───
+function switchTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('tab-' + id).classList.add('active');
+  btn.classList.add('active');
+  if (id === 'funnel') { renderFunnel('funnel-full', 'detail-panel-2'); }
+}
+
+function switchMonitor(id, btn) {
+  document.querySelectorAll('.monitor-content').forEach(el => el.classList.remove('active'));
+  document.querySelectorAll('.monitor-tab').forEach(el => el.classList.remove('active'));
+  document.getElementById('monitor-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// ─── INIT ───
+document.getElementById('current-date').textContent = new Date().toLocaleDateString('ko-KR', { year:'numeric', month:'long', day:'numeric', weekday:'long' });
+
+function initDashboard(liveData) {
+  // ── 실제 데이터 반영 ──
+  if (liveData) {
+    const kpi = liveData.kpi || {};
+    const fm  = liveData.funnel_metrics || {};
+
+    // KPI 카드 업데이트
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    if (kpiCards[0]) {
+      const inq = kpi.today_inquiries ?? 47;
+      const tgt = kpi.target_inquiries ?? 60;
+      kpiCards[0].querySelector('.kpi-value').textContent = inq;
+      kpiCards[0].querySelector('.kpi-meta').textContent = `목표: ${tgt}/일 · 달성률 ${Math.round(inq/tgt*100)}%`;
+    }
+    if (kpiCards[1]) {
+      const bk = kpi.today_bookings ?? 23;
+      const cr = kpi.conversion_rate ?? 49;
+      kpiCards[1].querySelector('.kpi-value').textContent = bk;
+      kpiCards[1].querySelector('.kpi-meta').textContent = `전환율 ${cr}% · 목표: ${kpi.target_conversion ?? 60}%`;
+    }
+    if (kpiCards[2]) {
+      const sv = kpi.search_vol_main ?? 3840;
+      kpiCards[2].querySelector('.kpi-value').textContent = sv.toLocaleString();
+    }
+    if (kpiCards[3]) {
+      const rk = kpi.competitor_risks ?? 0;
+      kpiCards[3].querySelector('.kpi-value').textContent = rk;
+      kpiCards[3].querySelector('.kpi-meta').textContent = rk > 0 ? '부작용 리뷰 발생 → 대응 준비' : '오늘 특이사항 없음';
+    }
+
+    // 퍼널 카운트 업데이트 (Naver DataLab 기반)
+    const stageKeys = [
+      'stage_01_awareness','stage_02_problem','stage_03_homecare','stage_04_pivot',
+      'stage_05_explore','stage_06_risk','stage_07_compare','stage_08_local',
+      'stage_09_intent','stage_10_convert'
+    ];
+    stageKeys.forEach((key, i) => {
+      const m = fm[key];
+      if (m && FUNNEL_STAGES[i]) {
+        FUNNEL_STAGES[i].count = m.count;
+        if (m.trend_pct !== 0) {
+          const trendStr = m.trend_pct > 0 ? `↑${m.trend_pct}%` : `↓${Math.abs(m.trend_pct)}%`;
+          // 채널 첫번째 키워드에 실제 트렌드 반영
+          if (FUNNEL_STAGES[i].channels && FUNNEL_STAGES[i].channels[0]?.keywords[0]) {
+            FUNNEL_STAGES[i].channels[0].keywords[0].trend = trendStr;
+          }
+        }
+      }
+    });
+
+    // 실제 09단계 문의/10단계 예약 반영
+    if (FUNNEL_STAGES[8]) FUNNEL_STAGES[8].count = kpi.today_inquiries ?? 47;
+    if (FUNNEL_STAGES[9]) FUNNEL_STAGES[9].count = kpi.today_bookings ?? 23;
+
+    // AI 알림 업데이트
+    if (liveData.alerts && liveData.alerts.length) {
+      AI_ALERTS.length = 0;
+      liveData.alerts.forEach(a => AI_ALERTS.push(a));
+    }
+
+    // 경쟁사 업데이트
+    if (liveData.competitor_summary && liveData.competitor_summary.length) {
+      COMPETITORS.length = 0;
+      liveData.competitor_summary.forEach((c, i) => {
+        COMPETITORS.push({
+          rank: i + 1,
+          name: c.name,
+          stage: c.stage || '경쟁사',
+          sentiment: c.sentiment,
+          alert: c.alert,
+          alertClass: c.alertClass,
+          pain: c.pain || ''
+        });
+      });
+    }
+
+    // 데이터 생성 시각 표시
+    if (liveData.meta?.generated_at) {
+      const genTime = new Date(liveData.meta.generated_at).toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
+      const el = document.querySelector('.header .header-sub + div') || document.querySelector('[style*="Last refresh"]');
+      if (el) el.textContent = `Last refresh: ${genTime} KST (실제 데이터)`;
+    }
+  }
+
+  // 렌더링
+  renderFunnel('funnel-mini', 'detail-panel');
+  renderFunnel('funnel-full', 'detail-panel-2');
+  renderQuarters();
+  renderKPITable();
+  renderCompetitors();
+  renderLossCapture();
+  renderMonitoring();
+  renderAlerts();
+}
+
+// dashboard_data.json 로드 시도 → 실패 시 fallback
+fetch('dashboard_data.json?t=' + Date.now())
+  .then(r => {
+    if (!r.ok) throw new Error('no json');
+    return r.json();
+  })
+  .then(data => {
+    console.log('[Dashboard] ✅ 실제 데이터 로드:', data.meta?.generated_at);
+    // 상태 배지 업데이트
+    const badge = document.querySelector('.status-badge');
+    if (badge) badge.innerHTML = '<div class="dot-live"></div>실제 데이터 연결됨';
+    initDashboard(data);
+  })
+  .catch(() => {
+    console.warn('[Dashboard] ⚠️ dashboard_data.json 없음 → 목업 데이터로 표시');
+    // 상태 배지 - 목업 모드 표시
+    const badge = document.querySelector('.status-badge');
+    if (badge) {
+      badge.style.background = 'rgba(245,158,11,0.12)';
+      badge.style.borderColor = 'rgba(245,158,11,0.3)';
+      badge.style.color = 'var(--yellow)';
+      badge.innerHTML = '⚠️ 목업 모드 · python data_generator.py 실행 필요';
+    }
+    initDashboard(null);
+  });
+
+</script>
+</body>
+</html>
