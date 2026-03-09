@@ -29,7 +29,7 @@ if sys.platform == "win32":
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
-load_dotenv()
+load_dotenv(override=True)
 
 
 # ─────────────────────────────────────────────
