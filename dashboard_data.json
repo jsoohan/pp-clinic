@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated_at": "2026-03-09T09:28:45.945870",
+    "generated_at": "2026-03-09T15:52:43.472860",
     "date": "2026-03-09",
     "data_version": "2.0"
   },
@@ -71,11 +71,11 @@
       "clinic": "리팅성형외과",
       "text": "강남 리프팅, 아름다운 변화를 위한 섬세한 관리 가이드. 넘어, 시술 효과를 오래 유지하고 부작용의 위험을 줄이는 데 핵심적인 역할을 합니다. ",
       "platform": "naver_blog",
-      "sentiment_score": 0.9,
+      "sentiment_score": 0.8,
       "complaint_keywords": [],
       "is_opportunity": false,
-      "summary": "강남 리프팅 시술 후 아름다운 변화와 건강한 아름다움을 위해 섬세한 관리가 시술 효과 유지 및 부작용 위험 감소에 핵심적인 역할을 한다고 강조하며 리팅성형외과의원을 언급합니다.",
-      "collected_at": "2026-03-09T09:27:10.690251"
+      "summary": "강남 리프팅 시술 후 효과 유지 및 부작용 감소를 위한 섬세하고 세심한 사후 관리의 중요성을 강조하는 내용입니다.",
+      "collected_at": "2026-03-09T15:50:57.602692"
     },
     {
       "clinic": "리팅성형외과",
@@ -83,136 +83,132 @@
       "platform": "naver_blog",
       "sentiment_score": 0.0,
       "complaint_keywords": [],
-      "is_opportunity": true,
-      "summary": "사용자들이 '지역명 + 시술명' 키워드를 이용해 성형외과를 검색하고 비슷한 고민을 가진 사람들의 후기를 찾아보는 경향이 있다는 내용입니다.",
-      "collected_at": "2026-03-09T09:27:15.527870"
+      "is_opportunity": false,
+      "summary": "해당 글은 리팅성형외과 키워드를 중심으로 사람들이 '지역명 + 시술명' 키워드를 사용하여 자신과 비슷한 고민을 가진 사람들의 후기를 찾아보는 검색 행태를 분석하고 있습니다.",
+      "collected_at": "2026-03-09T15:51:02.007568"
     },
     {
       "clinic": "리팅성형외과",
       "text": "**강남 리프팅, 나를 위한 시간 투자와 현명한 선택 가이드**. 리팅성형외과의원 서울 서울 강남구 도산대로 119 K타워 7층 강남에서 리프팅",
       "platform": "naver_blog",
-      "sentiment_score": 1.0,
+      "sentiment_score": 0.6,
       "complaint_keywords": [],
-      "is_opportunity": false,
-      "summary": "강남 리프팅 시술을 고민하는 고객을 위한 리팅성형외과의원의 현명한 병원 선택 가이드.",
-      "collected_at": "2026-03-09T09:27:22.042186"
+      "is_opportunity": true,
+      "summary": "강남 리프팅 시술을 고민하는 고객을 위한 현명한 선택 가이드로, 여러 병원의 상담과 정보 수집의 중요성을 강조합니다.",
+      "collected_at": "2026-03-09T15:51:07.515964"
     },
     {
       "clinic": "리팅성형외과",
       "text": "**강남 리프팅, 만족스러운 결과를 위한 7가지 체크리스트**. 리팅성형외과의원 서울 서울 강남구 도산대로 119 K타워 7층 거울을 볼 때마다",
       "platform": "naver_blog",
-      "sentiment_score": 0.4,
+      "sentiment_score": 0.6,
       "complaint_keywords": [],
       "is_opportunity": false,
-      "summary": "강남 리팅성형외과의원이 만족스러운 리프팅 시술을 위한 체크리스트를 제시하며, 응급 상황 대처 능력과 위생 관리의 중요성을 강조한다.",
-      "collected_at": "2026-03-09T09:27:28.148542"
+      "summary": "리팅성형외과의원의 강남 리프팅 시술에 대한 만족스러운 결과를 위한 체크리스트를 제시하며, 응급 대처 능력과 위생 관리의 중요성을 강조하는 후기이다.",
+      "collected_at": "2026-03-09T15:51:16.961352"
     },
     {
       "clinic": "리팅성형외과",
       "text": "**강남 리프팅, 안전하고 만족스러운 결과를 위한 핵심 가이드**. 리팅성형외과의원 서울 서울 강남구 도산대로 119 K타워 7층 거울 속 흐릿",
       "platform": "naver_blog",
-      "sentiment_score": -0.3,
+      "sentiment_score": 0.3,
       "complaint_keywords": [
         "흐릿해진 얼굴 윤곽",
-        "고민",
-        "수많은 병원",
-        "다양한 시술법",
-        "막막"
+        "선택의 어려움",
+        "막막함"
       ],
-      "is_opportunity": true,
-      "summary": "강남 리프팅 관련, 환자들이 겪는 흐릿한 얼굴 윤곽에 대한 고민과 수많은 병원 및 시술 선택의 막막함을 언급하며 안전하고 만족스러운 결과를 위한 가이드의 필요성을 제시하는 글.",
-      "collected_at": "2026-03-09T09:27:40.753666"
+      "is_opportunity": false,
+      "summary": "강남 리프팅 시술을 고민하는 고객들을 위한 안전하고 만족스러운 결과 도출 및 병원 선택 가이드.",
+      "collected_at": "2026-03-09T15:51:25.035814"
+    },
+    {
+      "clinic": "셀팅의원 청담",
+      "text": "청담실리프팅 후기 찾아보기 전 확인하세요 실리프팅 효과와... . 안녕하세요, 청담실리프팅 페이스플러스성형외과의원 원장 박정근입니다. 리프팅 시",
+      "platform": "naver_blog",
+      "sentiment_score": 0.0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "청담실리프팅 원장이 시술을 고민하는 사람들이 실제 사례 후기를 중요하게 생각하는 이유를 설명하는 글입니다.",
+      "collected_at": "2026-03-09T15:51:29.848881"
+    },
+    {
+      "clinic": "셀팅의원 청담",
+      "text": "압구정로데오피부과 고민하다 방문한 라셀라의원 상담 후기. 강남 쪽 피부과 의원을 여러 곳 찾아보던 중 압구정로데오피부과 검색을 많이 하게 되었는",
+      "platform": "naver_blog",
+      "sentiment_score": 0.2,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "고객은 압구정로데오 지역의 여러 피부과를 검색하고 고민한 끝에 라셀라의원을 방문하여 상담을 받았다.",
+      "collected_at": "2026-03-09T15:51:37.508334"
+    },
+    {
+      "clinic": "셀팅의원 청담",
+      "text": "울트라콜 200가격 정리! 효과·후기·주의사항까지 한눈에. 효과·후기·주의사항까지 한눈에 안녕하세요, 더마스터의원입니다. 밋밋한 페이스 라인이 ",
+      "platform": "naver_blog",
+      "sentiment_score": 0.85,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "더마스터의원에서 밋밋한 페이스 라인 개선을 위해 자연스러운 시술인 울트라콜 200을 소개하며 효과 및 주의사항을 안내하는 글입니다.",
+      "collected_at": "2026-03-09T15:51:42.946642"
     },
     {
       "clinic": "셀팅의원 청담",
       "text": "직장인관리 리베아에스테틱에서 티리온엑스 리프팅 받은 후기. ㅡㅡ 찾아보던 중에 피부과/의원에서 쓰는 온다리프팅과 거의 비슷하다는 티리온엑스 관리",
       "platform": "naver_blog",
-      "sentiment_score": 0.95,
+      "sentiment_score": 0.9,
       "complaint_keywords": [],
       "is_opportunity": false,
-      "summary": "리베아 에스테틱에서 티리온엑스 리프팅 관리를 받고 체중 감량 효과까지 얻어 매우 만족했다는 긍정적인 후기입니다.",
-      "collected_at": "2026-03-09T09:27:47.530211"
+      "summary": "리베아 에스테틱에서 티리온엑스 리프팅 관리를 받고 온다리프팅과 비슷한 효과에 만족했으며, 살이 빠졌다는 이야기를 들을 정도로 긍정적인 결과를 얻었다.",
+      "collected_at": "2026-03-09T15:51:49.097127"
     },
     {
       "clinic": "셀팅의원 청담",
       "text": "압구정로데오실리프팅 고민이라면? 라셀라의원 이야기 ♥. 특히 강남 근처에서 리프팅 시술로 알려진 곳을 찾아보게 되었는데요. 검색을 하다 보니 압",
       "platform": "naver_blog",
-      "sentiment_score": 0.8,
-      "complaint_keywords": [],
-      "is_opportunity": false,
-      "summary": "압구정로데오 실리프팅 시술을 알아보던 중, 라셀라의원의 많은 후기와 긍정적인 평가에 관심을 가지게 되었다는 내용입니다.",
-      "collected_at": "2026-03-09T09:27:52.508447"
-    },
-    {
-      "clinic": "셀팅의원 청담",
-      "text": "꾸준한 관리의 힘 포트라 리프팅이랑 오투덤 받고 컨디션... . 잇츠미의원 #포트라 #포트라리프팅 #오투덤 #오투덤테라피 #산소테라피 #백옥주사",
-      "platform": "naver_blog",
       "sentiment_score": 0.9,
       "complaint_keywords": [],
       "is_opportunity": false,
-      "summary": "잇츠미의원에서 포트라 리프팅과 오투덤 관리를 꾸준히 받아 컨디션이 좋아졌다는 긍정적인 후기입니다.",
-      "collected_at": "2026-03-09T09:27:58.091494"
-    },
-    {
-      "clinic": "셀팅의원 청담",
-      "text": "청담 피부과 사점사의원... 이브타이탄 통증, 주기, 가격 후기. 끌어올리는 시술을 찾다가 청담 피부과 사점사의원에서 이브타이탄 받아봤습니다 청",
-      "platform": "naver_blog",
-      "sentiment_score": -0.3,
-      "complaint_keywords": [
-        "통증"
-      ],
-      "is_opportunity": true,
-      "summary": "청담 피부과 사점사의원에서 이브타이탄 시술을 받았으며, 시술 과정에서 통증을 경험했다.",
-      "collected_at": "2026-03-09T09:28:02.157933"
-    },
-    {
-      "clinic": "셀팅의원 청담",
-      "text": "압구정로데오피부과 고우리스킨부스터 청담오가나셀의원 본식... . 안녕하세요 먹지용입니다:) 오늘은 압구정로데오피부과 청담 오가나셀의원에서 고우리",
-      "platform": "naver_blog",
-      "sentiment_score": 0.2,
-      "complaint_keywords": [],
-      "is_opportunity": false,
-      "summary": "청담 오가나셀의원에서 고우리스킨부스터 시술 후기를 시작하며, 시술 전 피부 건조함과 푸석함에 대한 고민을 언급합니다.",
-      "collected_at": "2026-03-09T09:28:07.128450"
+      "summary": "강남 근처 압구정로데오실리프팅 시술을 찾던 중 라셀라의원에 대한 긍정적인 후기를 보고 관심을 가지게 되었다.",
+      "collected_at": "2026-03-09T15:51:55.757213"
     }
   ],
   "competitor_summary": [
     {
       "rank": 1,
       "name": "리팅성형외과",
-      "sentiment": 70,
+      "sentiment": 73,
       "alert": "공략기회",
       "alertClass": "alert-red",
-      "pain": "강남 리프팅 시술 후 아름다운 변화와 건강한 아름다움을"
+      "pain": "강남 리프팅 시술 후 효과 유지 및 부작용 감소를 위한"
     },
     {
       "rank": 2,
       "name": "셀팅의원 청담",
-      "sentiment": 75,
-      "alert": "공략기회",
-      "alertClass": "alert-red",
-      "pain": "리베아 에스테틱에서 티리온엑스 리프팅 관리를 받고 체중"
+      "sentiment": 78,
+      "alert": "양호",
+      "alertClass": "alert-green",
+      "pain": "청담실리프팅 원장이 시술을 고민하는 사람들이 실제 사례"
     }
   ],
   "aeo": {
     "results": [
       {
         "query": "강남 실리프팅 잘 하는 병원 추천해줘",
-        "answer_snippet": "강남에서 실리프팅 잘 하는 병원을 찾으시는군요! 실리프팅은 시술자의 숙련도와 디자인 감각이 매우 중요한 시술이라 신중하게 선택하는 것이 좋습니다.\n\n제가 특정 병원을 직접 추천해 드릴 수는 없지만 (저는 AI이기 때문에 개인적인 경험이나 의견을 제공할 수 없습니다), 좋은 병원을 선택하는 데 도움이 될 만한 기준과 정보를 드릴게요.\n\n**강남 실리프팅 병원 선택 시 고려해야 할 요소:**\n\n1.  **의료진의 경험과 숙련도:**\n    *   가장 중요합니다. 얼마나 많은 시술 경험이 있는지, 디자인 감각은 뛰어난지 확인해야 합니다",
+        "answer_snippet": "강남에서 실리프팅 잘 하는 병원을 찾으시는군요! 실리프팅은 시술자의 노하우와 디자인 감각이 매우 중요한 시술이라 병원 선택에 신중하셔야 합니다. 몇 군데 추천 병원과 선택 시 고려사항을 알려드릴게요.\n\n**실리프팅 병원 선택 시 고려사항:**\n\n1.  **의료진의 경험과 숙련도:** 실리프팅은 단순히 실을 넣는 것을 넘어, 개인의 얼굴형, 피부 처짐 정도, 원하는 리프팅 방향 등을 종합적으로 고려하여 디자인하고 시술해야 자연스럽고 만족스러운 결과를 얻을 수 있습니다. 해당 시술 경험이 많은 의사를 선택하는 것이 중요합니다.\n2.  ",
         "pp_clinic_mentioned": false,
-        "timestamp": "2026-03-09T09:28:20.012140"
+        "timestamp": "2026-03-09T15:52:11.114447"
       },
       {
         "query": "신사역 피부과 리프팅 잘 하는 곳",
-        "answer_snippet": "신사역 주변은 피부과가 밀집해 있어 리프팅 시술을 잘 하는 곳을 찾기 좋은 지역입니다. 하지만 '잘 한다'는 기준이 개인마다 다를 수 있고, 의사의 숙련도, 사용하는 장비, 상담의 질, 사후 관리 등 여러 요소를 고려해야 합니다.\n\n아래에 신사역 주변에서 리프팅 시술로 많이 언급되거나 규모가 있는 피부과들을 몇 군데 추천해 드리며, 선택 시 고려할 사항도 함께 안내해 드립니다.\n\n**신사역 주변 리프팅으로 고려해볼 만한 피부과:**\n\n1.  **톡스앤필의원 (신사점 또는 가로수길점):**\n    *   **특징:** 전국적으로 체인",
+        "answer_snippet": "신사역 근처는 워낙 피부과가 많고, 리프팅 시술을 잘하는 곳도 다양해서 선택지가 넓습니다. 특정 병원을 추천하기보다는, **리프팅 시술을 잘하는 병원을 선택하는 기준**과 함께 몇 군데 **평판이 좋은 병원들**을 알려드릴게요.\n\n---\n\n### 🌟 리프팅 시술 잘하는 병원 선택 기준\n\n1.  **의료진의 숙련도와 경험:**\n    *   리프팅은 장비도 중요하지만, 시술하는 의사의 숙련도가 결과에 가장 큰 영향을 미칩니다. 얼굴의 해부학적 구조를 잘 이해하고, 개인의 피부 상태와 처짐 정도에 맞춰 정확한 디자인과 깊이로 시술할 수",
         "pp_clinic_mentioned": false,
-        "timestamp": "2026-03-09T09:28:32.529097"
+        "timestamp": "2026-03-09T15:52:27.503240"
       },
       {
         "query": "Thread lift clinic Sinsa Seoul recommendation",
-        "answer_snippet": "Sinsa-dong in Seoul, particularly around Garosu-gil and the wider Gangnam area, is a hub for aesthetic clinics. When it comes to thread lifts, you'll find many highly skilled doctors.\n\nHere are some general tips and a few clinics that are often well-regarded for their aesthetic procedures, including",
+        "answer_snippet": "Sinsa-dong, particularly around Garosu-gil and Apgujeong, is a prime location for aesthetic clinics in Seoul, offering a wide range of options for thread lifts. Given the sheer number of clinics, it's crucial to do thorough research.\n\nHere are some highly regarded clinics that are often mentioned fo",
         "pp_clinic_mentioned": false,
-        "timestamp": "2026-03-09T09:28:44.944957"
+        "timestamp": "2026-03-09T15:52:42.470663"
       }
     ],
     "mention_rate_pct": 0.0
@@ -221,8 +217,8 @@
     {
       "level": "red",
       "icon": "🚨",
-      "title": "경쟁사 약점 포착 3건",
-      "body": "불만 키워드: 통증, 고민, 흐릿해진 얼굴 윤곽. 즉시 우리 강점 콘텐츠 배포 권장."
+      "title": "경쟁사 약점 포착 1건",
+      "body": "불만 키워드: . 즉시 우리 강점 콘텐츠 배포 권장."
     },
     {
       "level": "yellow",
@@ -251,7 +247,7 @@
           "prev_ratio": 90
         }
       ],
-      "collected_at": "2026-03-09T09:26:39.984598"
+      "collected_at": "2026-03-09T15:50:20.187790"
     },
     "stage_02_problem": {
       "keywords": [
@@ -260,7 +256,7 @@
         "턱선 없어지는 이유"
       ],
       "ratios": [],
-      "collected_at": "2026-03-09T09:26:40.538297"
+      "collected_at": "2026-03-09T15:50:20.887412"
     },
     "stage_03_homecare": {
       "keywords": [
@@ -280,7 +276,7 @@
           "prev_ratio": 100
         }
       ],
-      "collected_at": "2026-03-09T09:26:41.114388"
+      "collected_at": "2026-03-09T15:50:21.546505"
     },
     "stage_04_pivot": {
       "keywords": [
@@ -289,7 +285,7 @@
         "피부과 가야하나"
       ],
       "ratios": [],
-      "collected_at": "2026-03-09T09:26:41.666949"
+      "collected_at": "2026-03-09T15:50:22.228335"
     },
     "stage_05_explore": {
       "keywords": [
@@ -304,7 +300,7 @@
           "prev_ratio": 47.22222
         }
       ],
-      "collected_at": "2026-03-09T09:26:42.228315"
+      "collected_at": "2026-03-09T15:50:22.926695"
     },
     "stage_06_risk": {
       "keywords": [
@@ -329,8 +325,7 @@
           "prev_ratio": 41.9753
         }
       ],
-      "collected_at": "2026-03-09T09:26:42.791639"
+      "collected_at": "2026-03-09T15:50:23.610122"
     }
   }
-}   
- 
+}
