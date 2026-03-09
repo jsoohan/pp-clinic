@@ -4,8 +4,9 @@ on:
   push:
     branches: [main]
     paths:
-      - 'dashboard.html'      # dashboard.html 변경 시 자동 배포
-  workflow_dispatch:           # 수동 배포 버튼
+      - 'dashboard.html'
+      - 'dashboard_data.json' # 데이터 변경 시에도 자동 배포
+  workflow_dispatch:
 
 permissions:
   contents: read
