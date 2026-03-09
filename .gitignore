@@ -13,7 +13,7 @@ __pycache__/
 data/*.json
 logs/
 *.log
-dashboard_data.json
+# 16: dashboard_data.json (removed to allow live deployment)
 
 # ─── OS ───
 .DS_Store
