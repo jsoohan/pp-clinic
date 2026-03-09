@@ -32,6 +32,9 @@ jobs:
         run: |
           mkdir -p _site
           cp dashboard.html _site/index.html
+          if [ -f "dashboard_data.json" ]; then
+            cp dashboard_data.json _site/
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
