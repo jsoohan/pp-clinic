@@ -420,11 +420,19 @@ def build_monthly_summary(data: dict) -> dict:
     """월간 KPI 달성률 요약"""
     kpi = data.get("kpi", {})
     cr  = kpi.get("conversion_rate", 49)
+    
+    def _get_float(key: str, default: float) -> float:
+        val = os.getenv(key, "").strip()
+        try:
+            return float(val) if val else default
+        except ValueError:
+            return default
+
     return {
         "avg_conversion_rate": cr,
-        "explorer_conversion": float(os.getenv("MANUAL_KPI_EXPLORER_CONVERSION", "2.4")),
-        "revisit_rate":        float(os.getenv("MANUAL_KPI_REVISIT_RATE", "34")),
-        "mom_revenue_growth":  float(os.getenv("MANUAL_KPI_MOM_GROWTH", "12")),
+        "explorer_conversion": _get_float("MANUAL_KPI_EXPLORER_CONVERSION", 2.4),
+        "revisit_rate":        _get_float("MANUAL_KPI_REVISIT_RATE", 34.0),
+        "mom_revenue_growth":  _get_float("MANUAL_KPI_MOM_GROWTH", 12.0),
     }
 
 
