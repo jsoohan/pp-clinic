@@ -36,6 +36,7 @@ jobs:
           MANUAL_KPI_BOOKINGS:  ${{ vars.MANUAL_KPI_BOOKINGS }}
           MANUAL_KPI_SEARCH_VOL: ${{ vars.MANUAL_KPI_SEARCH_VOL }}
           MANUAL_KPI_RISKS:     ${{ vars.MANUAL_KPI_RISKS }}
+          DASHBOARD_URL:        "https://jsoohan.github.io/pp-clinic/"
           PYTHONUTF8: "1"
         run: python data_generator.py --mode weekly
 

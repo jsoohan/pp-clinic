@@ -53,6 +53,7 @@ jobs:
           MANUAL_KPI_BOOKINGS:  ${{ vars.MANUAL_KPI_BOOKINGS }}
           MANUAL_KPI_SEARCH_VOL: ${{ vars.MANUAL_KPI_SEARCH_VOL }}
           MANUAL_KPI_RISKS:     ${{ vars.MANUAL_KPI_RISKS }}
+          DASHBOARD_URL:        "https://jsoohan.github.io/pp-clinic/"
           MANUAL_KPI_EXPLORER_CONVERSION: ${{ vars.MANUAL_KPI_EXPLORER_CONVERSION }}
           MANUAL_KPI_REVISIT_RATE:        ${{ vars.MANUAL_KPI_REVISIT_RATE }}
           MANUAL_KPI_MOM_GROWTH:          ${{ vars.MANUAL_KPI_MOM_GROWTH }}
