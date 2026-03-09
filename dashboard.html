@@ -1112,31 +1112,46 @@ function initDashboard(liveData) {
   renderAlerts();
 }
 
-// dashboard_data.json 로드 시도 → 실패 시 fallback
-fetch('dashboard_data.json?t=' + Date.now())
-  .then(r => {
-    if (!r.ok) throw new Error('no json');
-    return r.json();
-  })
-  .then(data => {
-    console.log('[Dashboard] ✅ 실제 데이터 로드:', data.meta?.generated_at);
-    // 상태 배지 업데이트
-    const badge = document.querySelector('.status-badge');
-    if (badge) badge.innerHTML = '<div class="dot-live"></div>실제 데이터 연결됨';
-    initDashboard(data);
-  })
-  .catch(() => {
-    console.warn('[Dashboard] ⚠️ dashboard_data.json 없음 → 목업 데이터로 표시');
-    // 상태 배지 - 목업 모드 표시
-    const badge = document.querySelector('.status-badge');
+// dashboard_data.json 로드 시도
+async function loadLiveData(retryCount = 0) {
+  const badge = document.querySelector('.status-badge');
+  if (badge) {
+    badge.style.background = 'rgba(16,185,129,0.05)';
+    badge.style.color = 'var(--muted)';
+    badge.innerHTML = '<div class="dot-live" style="background:var(--muted); animation:none;"></div>데이터 연결 중...';
+  }
+
+  try {
+    const response = await fetch('dashboard_data.json?t=' + Date.now());
+    if (!response.ok) throw new Error('Network response was not ok');
+    const data = await response.json();
+    
+    console.log('[Dashboard] ✅ 실제 데이터 로드 성공:', data.meta?.generated_at);
     if (badge) {
-      badge.style.background = 'rgba(245,158,11,0.12)';
-      badge.style.borderColor = 'rgba(245,158,11,0.3)';
-      badge.style.color = 'var(--yellow)';
-      badge.innerHTML = '⚠️ 목업 모드 · python data_generator.py 실행 필요';
+      badge.style.background = 'rgba(16,185,129,0.12)';
+      badge.style.borderColor = 'rgba(16,185,129,0.3)';
+      badge.style.color = 'var(--green)';
+      badge.innerHTML = '<div class="dot-live"></div>실제 데이터 연결됨';
     }
-    initDashboard(null);
-  });
+    initDashboard(data);
+  } catch (err) {
+    console.error('[Dashboard] ⚠️ 데이터 로드 실패:', err);
+    if (retryCount < 2) {
+      console.log(`[Dashboard] ${retryCount + 1}회차 재시도 중...`);
+      setTimeout(() => loadLiveData(retryCount + 1), 2000);
+    } else {
+      if (badge) {
+        badge.style.background = 'rgba(239,68,68,0.12)';
+        badge.style.borderColor = 'rgba(239,68,68,0.3)';
+        badge.style.color = 'var(--red)';
+        badge.innerHTML = '❌ 데이터 로드 실패 (F5를 눌러주세요)';
+      }
+      initDashboard(null); // 마지막 수단으로 기본값 표시
+    }
+  }
+}
+
+loadLiveData();
 
 </script>
 </body>
