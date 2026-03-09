@@ -442,7 +442,7 @@
   <div style="display:flex;gap:12px;align-items:center;">
     <div style="text-align:right;margin-right:4px;">
       <div style="font-size:13px;font-weight:600;" id="current-date"></div>
-      <div style="font-size:11px;color:var(--muted);">Last refresh: 08:00 KST</div>
+      <div style="font-size:11px;color:var(--muted);" id="last-refresh-time">Last refresh: 08:00 KST</div>
     </div>
     <div class="status-badge"><div class="dot-live"></div>AI 에이전트 가동 중</div>
   </div>
@@ -1096,7 +1096,7 @@ function initDashboard(liveData) {
     // 데이터 생성 시각 표시
     if (liveData.meta?.generated_at) {
       const genTime = new Date(liveData.meta.generated_at).toLocaleTimeString('ko-KR', {hour:'2-digit', minute:'2-digit'});
-      const el = document.querySelector('.header .header-sub + div') || document.querySelector('[style*="Last refresh"]');
+      const el = document.getElementById('last-refresh-time');
       if (el) el.textContent = `Last refresh: ${genTime} KST (실제 데이터)`;
     }
   }
