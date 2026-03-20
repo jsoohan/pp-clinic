@@ -13,8 +13,8 @@ COMPETITOR_CLINICS = [
     {
         "name": "팽팽의원",
         "is_own_clinic": True,
-        "naver_id": None,     # 네이버 지도에서 확인 후 입력
-        "kakao_id": None,
+        "naver_id": "1773277890",     # 네이버 지도에서 확인 후 입력
+        "kakao_id": "996135722",
         "specialty": "실리프팅 전문",
         "priority": "P0",
     },
