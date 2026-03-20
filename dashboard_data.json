@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-03-19T15:39:55.876581",
-    "date": "2026-03-19",
+    "generated_at": "2026-03-20T01:29:46.212602",
+    "date": "2026-03-20",
     "data_version": "2.0"
   },
   "kpi": {
@@ -17,8 +17,8 @@
   "funnel_metrics": {
     "stage_01_awareness": {
       "count": 12400,
-      "trend_pct": 0.0,
-      "top_keyword": ""
+      "trend_pct": 142.9,
+      "top_keyword": "얼굴 처짐"
     },
     "stage_02_problem": {
       "count": 8900,
@@ -36,14 +36,14 @@
       "top_keyword": ""
     },
     "stage_05_explore": {
-      "count": 3840,
-      "trend_pct": 0.0,
-      "top_keyword": ""
+      "count": 12400,
+      "trend_pct": 4.5,
+      "top_keyword": "리프팅 시술 종류"
     },
     "stage_06_risk": {
-      "count": 2900,
-      "trend_pct": 0.0,
-      "top_keyword": ""
+      "count": 4940,
+      "trend_pct": -18.8,
+      "top_keyword": "실리프팅 부작용"
     },
     "stage_07_compare": {
       "count": 1680,
@@ -66,24 +66,142 @@
       "top_keyword": ""
     }
   },
-  "competitor_reviews": [],
-  "competitor_summary": [],
+  "competitor_reviews": [
+    {
+      "clinic": "팽팽의원",
+      "text": "강남 실리프팅병원 후기 믿어도 될까? 현직 기준으로... . 시술 방식의 정밀함과 환자 개개인의 상태에 얼마나 맞춤화된 접근이 이루어졌는가에 따",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:33.208455"
+    },
+    {
+      "clinic": "팽팽의원",
+      "text": "팽팽의원 '줄기세포 실리프팅 센터' 공식 오픈 ㅣ팽팽클리닉. 1660-3300 #팽팽의원 #팽팽클리닉 #실리프팅 #실리프팅후기 #실리프팅비용 #",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:34.208788"
+    },
+    {
+      "clinic": "팽팽의원",
+      "text": "[내돈내산] 이마 미간 자갈턱 보톡스 솔직 후기｜2주 후기 가격... . 보톡스 시술후기를 낋여왔습니다&gt;.&lt; 저는 인천의 한 의원에서",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:35.209076"
+    },
+    {
+      "clinic": "팽팽의원",
+      "text": "(XERF), 실리프팅과 만나면 역대급 시너지? 팽팽의원, 팽팽클리닉. #팽팽의원 #팽팽클리닉 #실리프팅 #실리프팅후기 #실리프팅비용 #실리프팅",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:36.209404"
+    },
+    {
+      "clinic": "팽팽의원",
+      "text": "실과 사는 남자! 실리프팅 하나만 ㅣ팽팽클리닉, 팽팽의원. #팽팽의원 #팽팽클리닉 #실리프팅 #실리프팅후기 #실리프팅비용 #실리프팅가격 #얼굴실",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:37.209730"
+    },
+    {
+      "clinic": "리팅성형외과",
+      "text": "클래시스 경쟁력은 어떨까? 경쟁요인 분석해보기 (FEAT.... . 뮤즈클리닉, 리팅성형외과처럼 박리다매 시술 해주는 대형 프랜차이즈 공장형 피",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:38.210106"
+    },
+    {
+      "clinic": "리팅성형외과",
+      "text": "강남 리프팅, 아름다운 변화를 위한 섬세한 관리 가이드. 넘어, 시술 효과를 오래 유지하고 부작용의 위험을 줄이는 데 핵심적인 역할을 합니다. ",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:39.210423"
+    },
+    {
+      "clinic": "리팅성형외과",
+      "text": "리팅성형외과 키워드 정리. 예를 들어 '대구 이중턱살제거'나 '일산 성형외과'처럼 거주지나 생활권 중심으로 검색하며 나와 비슷한 고민을 가진 사",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:40.210768"
+    },
+    {
+      "clinic": "리팅성형외과",
+      "text": "**강남 리프팅, 나를 위한 시간 투자와 현명한 선택 가이드**. 리팅성형외과의원 서울 서울 강남구 도산대로 119 K타워 7층 강남에서 리프팅",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:41.211054"
+    },
+    {
+      "clinic": "리팅성형외과",
+      "text": "**강남 리프팅, 만족스러운 결과를 위한 7가지 체크리스트**. 리팅성형외과의원 서울 서울 강남구 도산대로 119 K타워 7층 거울을 볼 때마다",
+      "platform": "naver_blog",
+      "sentiment_score": 0,
+      "complaint_keywords": [],
+      "is_opportunity": false,
+      "summary": "분석 실패",
+      "collected_at": "2026-03-20T01:29:42.211363"
+    }
+  ],
+  "competitor_summary": [
+    {
+      "rank": 1,
+      "name": "팽팽의원",
+      "sentiment": 50,
+      "alert": "주의",
+      "alertClass": "alert-yellow",
+      "pain": "분석 실패"
+    },
+    {
+      "rank": 2,
+      "name": "리팅성형외과",
+      "sentiment": 50,
+      "alert": "주의",
+      "alertClass": "alert-yellow",
+      "pain": "분석 실패"
+    }
+  ],
   "aeo": {
     "results": [
       {
         "query": "강남 실리프팅 잘 하는 병원 추천해줘",
         "pp_clinic_mentioned": false,
-        "error": "[ERROR] GEMINI_API_KEY가 .env에 설정되지 않았습니다."
+        "error": "cannot import name 'genai' from 'google' (unknown location)"
       },
       {
         "query": "신사역 피부과 리프팅 잘 하는 곳",
         "pp_clinic_mentioned": false,
-        "error": "[ERROR] GEMINI_API_KEY가 .env에 설정되지 않았습니다."
+        "error": "cannot import name 'genai' from 'google' (unknown location)"
       },
       {
         "query": "Thread lift clinic Sinsa Seoul recommendation",
         "pp_clinic_mentioned": false,
-        "error": "[ERROR] GEMINI_API_KEY가 .env에 설정되지 않았습니다."
+        "error": "cannot import name 'genai' from 'google' (unknown location)"
       }
     ],
     "mention_rate_pct": 0.0
@@ -109,7 +227,14 @@
         "나이 들어 보이는 이유",
         "피부 탄력 저하"
       ],
-      "ratio": []
+      "ratios": [
+        {
+          "keyword": "얼굴 처짐",
+          "latest_ratio": 100,
+          "prev_ratio": 41.17647
+        }
+      ],
+      "collected_at": "2026-03-20T01:28:53.673236"
     },
     "stage_02_problem": {
       "keywords": [
@@ -117,7 +242,8 @@
         "팔자주름 심해지는 나이",
         "턱선 없어지는 이유"
       ],
-      "ratio": []
+      "ratios": [],
+      "collected_at": "2026-03-20T01:28:55.005710"
     },
     "stage_03_homecare": {
       "keywords": [
@@ -125,7 +251,8 @@
         "가정용 HIFU",
         "콜라겐 크림 효과"
       ],
-      "ratio": []
+      "ratios": [],
+      "collected_at": "2026-03-20T01:28:56.482314"
     },
     "stage_04_pivot": {
       "keywords": [
@@ -133,7 +260,8 @@
         "셀프 리프팅 한계",
         "피부과 가야하나"
       ],
-      "ratio": []
+      "ratios": [],
+      "collected_at": "2026-03-20T01:28:58.077129"
     },
     "stage_05_explore": {
       "keywords": [
@@ -141,7 +269,14 @@
         "울쎄라 vs 실리프팅",
         "리프팅 시술 종류"
       ],
-      "ratio": []
+      "ratios": [
+        {
+          "keyword": "리프팅 시술 종류",
+          "latest_ratio": 100,
+          "prev_ratio": 95.65217
+        }
+      ],
+      "collected_at": "2026-03-20T01:28:59.508964"
     },
     "stage_06_risk": {
       "keywords": [
@@ -149,7 +284,24 @@
         "실리프팅 볼패임",
         "실리프팅 통증"
       ],
-      "ratio": []
+      "ratios": [
+        {
+          "keyword": "실리프팅 부작용",
+          "latest_ratio": 74.71264,
+          "prev_ratio": 100
+        },
+        {
+          "keyword": "실리프팅 볼패임",
+          "latest_ratio": 10.34482,
+          "prev_ratio": 5.74712
+        },
+        {
+          "keyword": "실리프팅 통증",
+          "latest_ratio": 34.48275,
+          "prev_ratio": 41.37931
+        }
+      ],
+      "collected_at": "2026-03-20T01:29:00.854082"
     }
   }
 }
