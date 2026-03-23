@@ -1,7 +1,7 @@
 {
   "meta": {
-    "generated_at": "2026-03-22T14:05:13.646320",
-    "date": "2026-03-22",
+    "generated_at": "2026-03-23T16:14:40.474290",
+    "date": "2026-03-23",
     "data_version": "2.0"
   },
   "kpi": {
@@ -16,8 +16,8 @@
   },
   "funnel_metrics": {
     "stage_01_awareness": {
-      "count": 7294,
-      "trend_pct": 33.3,
+      "count": 12400,
+      "trend_pct": 75.0,
       "top_keyword": "얼굴 처짐"
     },
     "stage_02_problem": {
@@ -36,13 +36,13 @@
       "top_keyword": ""
     },
     "stage_05_explore": {
-      "count": 5930,
-      "trend_pct": -38.9,
+      "count": 7008,
+      "trend_pct": -43.5,
       "top_keyword": "리프팅 시술 종류"
     },
     "stage_06_risk": {
-      "count": 4571,
-      "trend_pct": -17.0,
+      "count": 3444,
+      "trend_pct": -35.3,
       "top_keyword": "실리프팅 부작용"
     },
     "stage_07_compare": {
@@ -75,7 +75,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:00.642205"
+      "collected_at": "2026-03-23T16:14:27.469982"
     },
     {
       "clinic": "팽팽의원",
@@ -85,7 +85,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:01.642510"
+      "collected_at": "2026-03-23T16:14:28.470297"
     },
     {
       "clinic": "팽팽의원",
@@ -95,7 +95,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:02.642862"
+      "collected_at": "2026-03-23T16:14:29.470656"
     },
     {
       "clinic": "팽팽의원",
@@ -105,7 +105,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:03.643189"
+      "collected_at": "2026-03-23T16:14:30.470981"
     },
     {
       "clinic": "팽팽의원",
@@ -115,7 +115,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:04.643498"
+      "collected_at": "2026-03-23T16:14:31.471306"
     },
     {
       "clinic": "리팅성형외과",
@@ -125,7 +125,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:05.643827"
+      "collected_at": "2026-03-23T16:14:32.471652"
     },
     {
       "clinic": "리팅성형외과",
@@ -135,7 +135,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:06.644144"
+      "collected_at": "2026-03-23T16:14:33.471990"
     },
     {
       "clinic": "리팅성형외과",
@@ -145,7 +145,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:07.644466"
+      "collected_at": "2026-03-23T16:14:34.472326"
     },
     {
       "clinic": "리팅성형외과",
@@ -155,7 +155,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:08.644774"
+      "collected_at": "2026-03-23T16:14:35.472687"
     },
     {
       "clinic": "리팅성형외과",
@@ -165,7 +165,7 @@
       "complaint_keywords": [],
       "is_opportunity": false,
       "summary": "분석 실패",
-      "collected_at": "2026-03-22T14:05:09.645092"
+      "collected_at": "2026-03-23T16:14:36.473004"
     }
   ],
   "competitor_summary": [
@@ -230,11 +230,11 @@
       "ratios": [
         {
           "keyword": "얼굴 처짐",
-          "latest_ratio": 58.82352,
-          "prev_ratio": 44.11764
+          "latest_ratio": 100,
+          "prev_ratio": 57.14285
         }
       ],
-      "collected_at": "2026-03-22T14:04:21.521770"
+      "collected_at": "2026-03-23T16:13:47.567630"
     },
     "stage_02_problem": {
       "keywords": [
@@ -243,7 +243,7 @@
         "턱선 없어지는 이유"
       ],
       "ratios": [],
-      "collected_at": "2026-03-22T14:04:22.849713"
+      "collected_at": "2026-03-23T16:13:48.878656"
     },
     "stage_03_homecare": {
       "keywords": [
@@ -252,7 +252,7 @@
         "콜라겐 크림 효과"
       ],
       "ratios": [],
-      "collected_at": "2026-03-22T14:04:23.963901"
+      "collected_at": "2026-03-23T16:13:50.182890"
     },
     "stage_04_pivot": {
       "keywords": [
@@ -261,7 +261,7 @@
         "피부과 가야하나"
       ],
       "ratios": [],
-      "collected_at": "2026-03-22T14:04:25.392022"
+      "collected_at": "2026-03-23T16:13:51.469755"
     },
     "stage_05_explore": {
       "keywords": [
@@ -272,11 +272,11 @@
       "ratios": [
         {
           "keyword": "리프팅 시술 종류",
-          "latest_ratio": 47.82608,
-          "prev_ratio": 78.26086
+          "latest_ratio": 56.52173,
+          "prev_ratio": 100
         }
       ],
-      "collected_at": "2026-03-22T14:04:26.682860"
+      "collected_at": "2026-03-23T16:13:52.600129"
     },
     "stage_06_risk": {
       "keywords": [
@@ -287,21 +287,21 @@
       "ratios": [
         {
           "keyword": "실리프팅 부작용",
-          "latest_ratio": 71.21212,
-          "prev_ratio": 78.78787
+          "latest_ratio": 51.51515,
+          "prev_ratio": 75.75757
         },
         {
           "keyword": "실리프팅 볼패임",
-          "latest_ratio": 9.0909,
-          "prev_ratio": 9.0909
+          "latest_ratio": 7.57575,
+          "prev_ratio": 7.57575
         },
         {
           "keyword": "실리프팅 통증",
-          "latest_ratio": 30.30303,
+          "latest_ratio": 24.24242,
           "prev_ratio": 45.45454
         }
       ],
-      "collected_at": "2026-03-22T14:04:27.974018"
+      "collected_at": "2026-03-23T16:13:53.893843"
     }
   }
 }
